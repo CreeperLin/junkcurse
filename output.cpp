@@ -294,7 +294,6 @@ void prtmain()
 {
 	int tx = mx(12), ty = scr_h*0.3;
 	clear();
-	mvprintw(my(1),mx(0),"+");
 	attron(A_BOLD);
 	mvprintw(ty, tx, "Project Junk");
 	attroff(A_BOLD);
