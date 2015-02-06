@@ -14,4 +14,6 @@
 #define maxs 20
 #define mxmsg 5
 #define eran 7
+#define msgh 5
+#define comh 5
 #endif

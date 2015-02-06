@@ -34,14 +34,14 @@ void gtime::Exchg()
 	{
 		if (h >= 6 && h < 18)
 		{
-			msg.print("The morning sun has vanquished the horrible night.\n");
+			msg.print("The morning sun has vanquished the horrible night.");
 		}
 	}
 	else
 	{
 		if (h < 6 || h >= 18)
 		{
-			msg.print("What a horrible night to have a curse.\n");
+			msg.print("What a horrible night to have a curse.");
 			nt = 1;
 		}
 	}
@@ -51,16 +51,16 @@ void gtime::Exchg()
 		switch (cse)
 		{
 		case 1:
-			msg.print("The Spring has come.\n");
+			msg.print("The Spring has come.");
 			break;
 		case 2:
-			msg.print("The Summer has come.\n");
+			msg.print("The Summer has come.");
 			break;
 		case 3:
-			msg.print("The Autumn has come.\n");
+			msg.print("The Autumn has come.");
 			break;
 		case 4:
-			msg.print("The Winter has come.\n");
+			msg.print("The Winter has come.");
 			break;
 		}
 	}

@@ -34,9 +34,9 @@ int GameStart()
 int Command()
 {
 	char input[1024], *tpc;
-	printw(">");
+	mvprintw(scr_h - msgh - 1, 0, ">");
 	echo();
-	scanw("%s",input);
+	scanw("%s", input);
 	noecho();
 	tpc = strtok(input, " ");
 	if (!tpc)
@@ -113,7 +113,7 @@ int Command()
 			player.p.x = tx;
 			player.p.y = ty;
 		}
-		msg.print("You've teleported.\n");
+		msg.print("You've teleported.");
 	}
 	else if (!strcmp(tpc, "map"))
 	{
@@ -130,12 +130,11 @@ int Command()
 			mob[i].Reset();
 		}
 		tolspn = 0;
-		msg.print
-			("Boom!\nEvery mob was wiped out...(I wonder why you're still around...)\n");
+		msg.print("Boom!\nEvery mob was wiped out...(I wonder why you're still around...)");
 	}
 	else if (!strcmp(tpc, "spnchk"))
 	{
-		msg.print("result %d\n",SpawnChk(GetPara(),blk[player.p.geti()]));
+		msg.print("result %d", SpawnChk(GetPara(), blk[player.p.geti()]));
 	}
 	else if (!strcmp(tpc, "spawn"))
 	{
@@ -176,7 +175,7 @@ int Command()
 		int nh = GetPara();
 		int nm = GetPara();
 		int nd = GetPara();
-		if (nh || nm||nd)
+		if (nh || nm || nd)
 		{
 			tm.Adj(nm, nh, nd);
 		}
@@ -194,21 +193,21 @@ int Command()
 		char *tc = strtok(NULL, " ");
 		if (!tc)
 		{
-			msg.print("Wrong Parameters.\n");
+			msg.print("Wrong Parameters.");
 			return 0;
 		}
 		if (!strcmp(tc, "full"))
 		{
 			player.health = player.maxhlth;
-			msg.print("You've fully recovered.\n");
+			msg.print("You've fully recovered.");
 		}
 		else
 		{
 			unsigned int hlth = atoi(tc);
 			if (hlth)
 			{
-				player.Adjhlth(hlth,0,0);
-				msg.print("You've got %d health.\n", hlth);
+				player.Adjhlth(hlth, 0, 0);
+				msg.print("You've got %d health.", hlth);
 			}
 		}
 	}
@@ -261,7 +260,7 @@ int Command()
 	}
 	else if (!strcmp(tpc, "clrblk"))
 	{
-		ClrBlk(GetPara(),GetPara());
+		ClrBlk(GetPara(), GetPara());
 	}
 	else if (!strcmp(tpc, "item"))
 	{
@@ -284,37 +283,42 @@ int Command()
 	}
 	else if (!strcmp(tpc, "listitem"))
 	{
+		clear();
 		for (int i = 0; i < inum; i++)
 		{
 			if (witem[i].id)
 			{
-				msg.print("%d %s x%d %ld,%ld\n", i,
-					   GetItemNm(witem[i].id), witem[i].amt,
-					   witem[i].p.x, witem[i].p.y);
+				printw("%d %s x%d %ld,%ld\n", i,
+						  GetItemNm(witem[i].id), witem[i].amt, witem[i].p.x, witem[i].p.y);
 			}
 		}
+		refresh();
 	}
 	else if (!strcmp(tpc, "listthing"))
 	{
+		clear();
 		for (int i = 0; i < itmid; i++)
 		{
-			msg.print("%d %s\n", i, GetItemNm(i));
+			printw("%d %s\n", i, GetItemNm(i));
 		}
+		refresh();
 	}
 	else if (!strcmp(tpc, "listmob"))
 	{
+		clear();
 		for (int i = 1; i <= mobid; i++)
 		{
-			msg.print
+			printw
 				("%s id:%d\nHealth:%d\nAtk(m/r):%d/%d Def:%d\nRng:%d Srng:%d Spd:%d\n\n",
 				 GetMobNm(i), i, GetMobMhlth(i), GetMobMatk(i),
-				 GetMobRatk(i), GetMobDef(i), GetMobRng(i),
-				 GetMobSrng(i), GetMobSpd(i));
+				 GetMobRatk(i), GetMobDef(i), GetMobRng(i), GetMobSrng(i), GetMobSpd(i));
 		}
+		refresh();
 	}
 	else if (!strcmp(tpc, "mstat"))
 	{
-		msg.print("%d/%d %d\n", tolspn, maxspn, spnrt);
+		clear();
+		printw("%d/%d %d\n", tolspn, maxspn, spnrt);
 		for (int i = 0; i < mobn; i++)
 		{
 			if (mob[i].id)
@@ -330,11 +334,11 @@ int Command()
 		int dur = GetPara();
 		if (tgt == -1)
 		{
-			player.Addbuff(bid, dur,0);
+			player.Addbuff(bid, dur, 0);
 		}
 		else if (tgt > 0)
 		{
-			mob[--tgt].Addbuff(bid, dur,0);
+			mob[--tgt].Addbuff(bid, dur, 0);
 		}
 	}
 	else if (!strcmp(tpc, "exp"))
@@ -413,7 +417,7 @@ int GetPara()
 	char *tc = strtok(NULL, " ");
 	if (!tc)
 	{
-		msg.print("Wrong Parameters.\n");
+		msg.print("Wrong Parameters.");
 		return 0;
 	}
 	return atoi(tc);
@@ -421,9 +425,13 @@ int GetPara()
 
 int InputNum(int max)
 {
+	int cx, cy;
+	getyx(stdscr, cy, cx);
 	while (1)
 	{
 		int n;
+		move(cy, cx);
+		clrtoeol();
 		printw(">");
 		echo();
 		scanw("%d", &n);
@@ -452,7 +460,7 @@ int AtkCnt(int told, int def, int cc)
 		cm = -2;
 	}
 	int tmp = told * (0.8 + 0.1 * (rand() % 4)) - def;
-	// msg.print("told %d def %d cc %d tmp %d\n", told, def, cc, tmp);
+	// msg.print("told %d def %d cc %d tmp %d", told, def, cc, tmp);
 	if (tmp > 1)
 	{
 		return cm * tmp;
@@ -471,7 +479,7 @@ int SplashDmg(pos cp, pos np, int rng, int dmg)
 		return 0;
 	}
 	double td = (inf * inf + inf) * dmg + 1;
-	// msg.print("splash %lf %lf\n",inf,td);
+	// msg.print("splash %lf %lf",inf,td);
 	return td > 1 ? td : 0;
 }
 
@@ -479,22 +487,22 @@ void Explode(pos cp, int eid)
 {
 	int rng = GetExRng(eid);
 	int dmg = GetExDmg(eid);
-	msg.print("A %s exploded\n", GetItemNm(eid));
+	msg.print("A %s exploded", GetItemNm(eid));
 	if (player.health)
 	{
 		int atk = SplashDmg(cp, player.p, rng, dmg);
-		// msg.print("%d\n", atk);
-		player.Adjhlth(AtkCnt(atk, player.GetDef(), 0),3,eid);
+		// msg.print("%d", atk);
+		player.Adjhlth(AtkCnt(atk, player.GetDef(), 0), 3, eid);
 	}
 	for (int i = 0; i < mobn; i++)
 	{
 		if (mob[i].id)
 		{
 			int atk = SplashDmg(cp, mob[i].p, rng, dmg);
-			// msg.print("%d\n", atk);
+			// msg.print("%d", atk);
 			if (atk)
 			{
-				if (mob[i].Adjhlth(AtkCnt(atk, mob[i].GetDef(), 0),3,eid))
+				if (mob[i].Adjhlth(AtkCnt(atk, mob[i].GetDef(), 0), 3, eid))
 				{
 					mob[i].Reset();
 				}
@@ -520,7 +528,8 @@ int Prob(int pct)
 
 void ExceptionProc()
 {
-	msg.print("Input error, please try again.\n");
+	msg.print("Input error, please try again.");
+	msg.Show();
 }
 
 void MkGdir()
@@ -544,10 +553,10 @@ int SavW()
 	strcat(wdir, bnm);
 	if ((wsav = fopen(wdir, "wb")) == NULL)
 	{
-		msg.print("Failed to open.\n");
+		msg.print("Failed to open.");
 		return 0;
 	}
-	msg.print("Saving %s...\n", world.name);
+	msg.print("Saving %s...", world.name);
 	fwrite(&world, sizeof(world), 1, wsav);
 	fwrite(&tm, sizeof(tm), 1, wsav);
 	for (int i = 0; i < inum; i++)
@@ -564,10 +573,10 @@ int SavW()
 	}
 	if (fclose(wsav))
 	{
-		msg.print("Failed to close.\n");
+		msg.print("Failed to close.");
 		return 0;
 	}
-	msg.print("%s saved successfully.\n", world.name);
+	msg.print("%s saved successfully.", world.name);
 	return 1;
 }
 
@@ -580,17 +589,17 @@ int SavP()
 	strcat(pdir, pnm);
 	if ((psav = fopen(pdir, "wb")) == NULL)
 	{
-		msg.print("Failed to open.\n");
+		msg.print("Failed to open.");
 		return 0;
 	}
-	msg.print("Saving %s...\n", player.name);
+	msg.print("Saving %s...", player.name);
 	fwrite(&player, sizeof(player), 1, psav);
 	if (fclose(psav))
 	{
-		msg.print("Failed to close.\n");
+		msg.print("Failed to close.");
 		return 0;
 	}
-	msg.print("%s saved successfully.\n", player.name);
+	msg.print("%s saved successfully.", player.name);
 	return 1;
 }
 
@@ -599,10 +608,10 @@ int LoadW()
 	FILE *wld;
 	if ((wld = fopen("/mnt/sdcard/Game/Worlds/World 1/data", "rb")) == NULL)
 	{
-		msg.print("Failed to open.\n");
+		msg.print("Failed to open.");
 		return 0;
 	}
-	msg.print("Loading world\n");
+	msg.print("Loading world");
 	fread(&world, sizeof(world), 1, wld);
 	fread(&tm, sizeof(tm), 1, wld);
 	for (int i = 0; i < inum; i++)
@@ -620,10 +629,10 @@ int LoadW()
 	}
 	if (fclose(wld))
 	{
-		msg.print("Failed to close.\n");
+		msg.print("Failed to close.");
 		return 0;
 	}
-	msg.print("%s loaded successfully.\n", world.name);
+	msg.print("%s loaded successfully.", world.name);
 	return 1;
 }
 
@@ -632,18 +641,18 @@ int LoadP()
 	FILE *pld;
 	if ((pld = fopen("/mnt/sdcard/Game/Players/Alpha/data", "rb")) == NULL)
 	{
-		msg.print("Failed to open.\n");
+		msg.print("Failed to open.");
 		return 0;
 	}
-	msg.print("Loading player\n");
+	msg.print("Loading player");
 	fread(&player, sizeof(player), 1, pld);
 	if (fclose(pld))
 	{
-		msg.print("Failed to close.\n");
+		msg.print("Failed to close.");
 		return 0;
 	}
 	player.p = player.spn;
-	msg.print("%s loaded successfully.\n", player.name);
+	msg.print("%s loaded successfully.", player.name);
 	return 1;
 }
 

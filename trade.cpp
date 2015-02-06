@@ -87,9 +87,10 @@ void prtsell(int mid)
 	while (1)
 	{
 		clear();
-		msg.print("money:%d %s\n",player.GetInvAmt(curr),cn);
+		printw("money:%d %s\n",player.GetInvAmt(curr),cn);
 		prtinv();
-		msg.print("Enter number to select,0 to exit.\n");
+		printw("Enter number to select,0 to exit.\n");
+		refresh();
 		int sn = InputNum(30);
 		if (sn == 0)
 		{
@@ -99,20 +100,21 @@ void prtsell(int mid)
 		int ta = player.GetInvAmt(sid), tp;
 		if (IsCurr(sid))
 		{
-			msg.print("You can't sell it.\n");
+			msg.print("You can't sell it.");
 			continue;
 		}
 		else
 		{
 			tp = 0.2 * GetBPrice(sid,curr);
 		}
-		msg.print("Price:%d %s\nInput amount to be sold.(total %d)\n", tp,cn, ta);
+		printw("Price:%d %s\nInput amount to be sold.(total %d)\n", tp,cn, ta);
+		refresh();
 		int samt = InputNum(ta);
 		if (!samt)
 		{
 			continue;
 		}
-		msg.print("You sold out %s x%d.\n", GetItemNm(sid), samt);
+		msg.print("You sold out %s x%d.", GetItemNm(sid), samt);
 		player.DecInv(sid, samt);
 		player.AddInv(curr, samt * tp, 0, 0);
 	}
@@ -124,15 +126,16 @@ void prtrd(int mid)
 	SetSell(mid);
 	int curr = GetCurr(mid), mny = player.GetInvAmt(curr);
 	const char *cn = GetCurrNm(curr);
-	msg.print("money:%d %s\n", mny, cn);
+	printw("money:%d %s\n", mny, cn);
 	while (1)
 	{
 		for (int i = 0; i < cnum; i++)
 		{
-			msg.print("%d.%s %d%s\n", i + 1, GetItemNm(Sid[i]),
+			printw("%d.%s %d%s\n", i + 1, GetItemNm(Sid[i]),
 				   GetBPrice(Sid[i],curr), cn);
 		}
-		msg.print("Enter number to select, or 0 to cancel.\n");
+		printw("Enter number to select, or 0 to cancel.\n");
+		refresh();
 		int tmps = InputNum(cnum + 1);
 		if (tmps == 0)
 		{
@@ -143,10 +146,11 @@ void prtrd(int mid)
 		int maxa = mny / prc;
 		if (!maxa)
 		{
-			msg.print("Can't afford this.\n");
+			msg.print("Can't afford this.");
 			continue;
 		}
-		msg.print("Enter amount(max %d), or 0 to cancel.\n", maxa);
+		printw("Enter amount(max %d), or 0 to cancel.\n", maxa);
+		refresh();
 		int namt = InputNum(maxa);
 		if (namt == 0)
 		{

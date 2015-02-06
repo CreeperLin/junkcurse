@@ -2,26 +2,25 @@
 using namespace std;
 int scr_w, scr_h;
 attr_t attr[17];
-/*
-attr list
-0 white(default)
-1 black
-2 red
-3 green
-4 yellow
-5 blue
-6 purple
-7 cyan
-8 bold_white
-9 grey
-10 b_red
-11 b_green
-12 b_yellow
-13 b_blue
-14 b_purple
-15 b_cyan
-16 reserved
-*/
+// attr list 
+// 0 white(default) 
+// 1 black 
+// 2 red 
+// 3 green 
+// 4 yellow 
+// 5 blue 
+// 6 purple 
+// 7 cyan 
+// 8 bold_white 
+// 9 grey 
+// 10 b_red 
+// 11 b_green 
+// 12 b_yellow 
+// 13 b_blue 
+// 14 b_purple 
+// 15 b_cyan
+// 16 reserved
+
 int mx(int w)
 {
 	return (scr_w - w) / 2;
@@ -30,6 +29,16 @@ int mx(int w)
 int my(int h)
 {
 	return (scr_h - h) / 2;
+}
+
+int mx(int w, int cw)
+{
+	return (cw - w) / 2;
+}
+
+int my(int h, int ch)
+{
+	return (ch - h) / 2;
 }
 
 int cx()
@@ -55,7 +64,7 @@ void printwr(const char *ch, ...)
 	refresh();
 }
 
-void printwr(int attn, const char * ch, ...)
+void printwr(int attn, const char *ch, ...)
 {
 	va_list arg;
 	va_start(arg, ch);
@@ -92,14 +101,14 @@ void prtbuff(int bid, int sbj, int obj)
 	}
 	if (!obj)
 	{
-		msg.print("%s got inflicted with %s buff.\n", sbjn, GetBuffNm(bid));
+		msg.print("%s got inflicted with %s buff.", sbjn, GetBuffNm(bid));
 		return;
 	}
 	else if (obj > 0)
 	{
 		objn = GetMobNm(obj);
 	}
-	msg.print("%s inflict %s buff on %s.\n", objn, GetBuffNm(bid), sbjn);
+	msg.print("%s inflict %s buff on %s.", objn, GetBuffNm(bid), sbjn);
 }
 
 void prtadjm(int n, int sbj, int evt, int obj)
@@ -143,7 +152,7 @@ void prtadjm(int n, int sbj, int evt, int obj)
 	default:
 		return;
 	}
-	msg.print(", mana %+d.\n", n);
+	msg.print(", mana %+d.", n);
 }
 
 void prtadjh(int n, int sbj, int evt, int obj)
@@ -187,7 +196,7 @@ void prtadjh(int n, int sbj, int evt, int obj)
 	default:
 		return;
 	}
-	msg.print(", health %+d.\n", n);
+	msg.print(", health %+d.", n);
 }
 
 void prtdmsg(int sbj, int evt, int obj)
@@ -206,21 +215,21 @@ void prtdmsg(int sbj, int evt, int obj)
 		}
 		if (sbj < 0)
 		{
-			msg.print("%s were slain by %s.\n", sbjn, objn);
+			msg.print("%s were slain by %s.", sbjn, objn);
 		}
 		else
 		{
-			msg.print("%s killed %s.\n", objn, sbjn);
+			msg.print("%s killed %s.", objn, sbjn);
 		}
 		break;
 	case 2:
 		switch (obj)
 		{
 		case 1:
-			msg.print("%s was burned down.\n", sbjn);
+			msg.print("%s was burned down.", sbjn);
 			break;
 		case 3:
-			msg.print("%s didn't find the antidote.\n", sbjn);
+			msg.print("%s didn't find the antidote.", sbjn);
 			break;
 		}
 		break;
@@ -229,19 +238,19 @@ void prtdmsg(int sbj, int evt, int obj)
 		switch (GetItemType(obj))
 		{
 		case 1:
-			msg.print("%s consumed a %s and died.\n", sbjn, objn);
+			msg.print("%s consumed a %s and died.", sbjn, objn);
 			break;
 		case 9:
-			msg.print("%s was blown up.\n", sbjn);
+			msg.print("%s was blown up.", sbjn);
 			break;
 		default:
-			msg.print("%s blah died because of %s.\n", sbjn, objn);
+			msg.print("%s blahly died because of %s.", sbjn, objn);
 		}
 	case 4:
 		switch (obj)
 		{
 		case 1:
-			msg.print("%s got fried.\n", sbjn);
+			msg.print("%s got fried.", sbjn);
 			break;
 		}
 		break;
@@ -276,24 +285,25 @@ int GetBuffCol(int id)
 	return 0;
 }
 
-const char *GetBuffChar(int id)
+const char GetBuffChar(int id)
 {
 	switch (id)
 	{
 	case 1:
-		return "F";
+		return 'F';
 	case 2:
-		return "+";
+		return '+';
 	case 3:
-		return "P";
+		return 'P';
 	}
-	return "B";
+	return 'B';
 }
 
 void prtmain()
 {
-	int tx = mx(12), ty = scr_h*0.3;
+	int tx = mx(12), ty = scr_h * 0.3;
 	clear();
+	mvprintw(0, 0, "width %d, height %d", scr_w, scr_h);
 	attron(A_BOLD);
 	mvprintw(ty, tx, "Project Junk");
 	attroff(A_BOLD);
@@ -317,6 +327,13 @@ void prtpldth()
 	refresh();
 }
 
+void prtile(char c, int attn)
+{
+	attron(attr[attn]);
+	printw("%c ", c);
+	attroff(attr[attn]);
+}
+
 void prthud()
 {
 	refresh();
@@ -334,7 +351,7 @@ void prthud()
 		int bid = player.buff[i].id;
 		if (bid)
 		{
-			printw("%s", GetBuffChar(bid));
+			prtile(GetBuffChar(bid), GetBuffCol(bid));
 			move(1, cx() - 2);
 		}
 	}
@@ -347,7 +364,7 @@ void prthud()
 			break;
 		}
 	}
-	move(my(13),mx(26));
+	move(my(13, scr_h - 4 - msgh - comh), mx(26));
 #if devmode
 	player.IsEquipped(32) ? prtfmp(8) : prtmp(6);
 #else
@@ -356,10 +373,11 @@ void prthud()
 	int p = player.ptgt;
 	if (p)
 	{
-		printw("Target: %s (%d/%d)\n", mob[p - 1].name(), mob[p - 1].health, mob[p - 1].maxhlth);
+		mvprintw(scr_h - msgh - comh - 1, 0, "Target: %s (%d/%d)\n", mob[p - 1].name(),
+				 mob[p - 1].health, mob[p - 1].maxhlth);
 		prtbar(mob[p - 1].health, mob[p - 1].maxhlth);
 	}
-	msg.Init(ctop(0, scr_h - 8), ctop(scr_w-1, scr_h-1));
+	msg.Init(ctop(0, scr_h - msgh), ctop(scr_w - 1, scr_h - 1));
 	msg.Show();
 	refresh();
 }
@@ -368,27 +386,27 @@ void prtast()
 {
 	if (tm.h < 5)
 	{
-		msg.print("You see stars in the sky.\n");
+		msg.print("You see stars in the sky.");
 	}
 	else if (tm.h < 6)
 	{
-		msg.print("The sky is getting brighter.\n");
+		msg.print("The sky is getting brighter.");
 	}
 	else if (tm.h < 12)
 	{
-		msg.print("It's morning.\n");
+		msg.print("It's morning.");
 	}
 	else if (tm.h < 17)
 	{
-		msg.print("It's afternoon.\n");
+		msg.print("It's afternoon.");
 	}
 	else if (tm.h < 18)
 	{
-		msg.print("You saw the twilight falling.\n");
+		msg.print("You saw the twilight falling.");
 	}
 	else if (tm.h < 24)
 	{
-		msg.print("You are cove2 in moon light.\n");
+		msg.print("You are covered in moon light.");
 	}
 }
 
@@ -396,8 +414,8 @@ void Obsrv()
 {
 	int mfnd = 0, plsrng = player.GetSrng();
 	unsigned long dist;
-	msg.print("You are now in the %s.\n", GetBlkNm(blk[player.p.geti()]));
-	msg.print("(debug)time %d:%d day %d pos: %d,%d\n", tm.h, tm.m, tm.d, player.p.x, player.p.y);
+	msg.print("You are now in the %s.", GetBlkNm(blk[player.p.geti()]));
+	msg.print("(debug)time %d:%d day %d pos: %d,%d", tm.h, tm.m, tm.d, player.p.x, player.p.y);
 	prtast();
 	for (int i = 0; i < inum; i++)
 	{
@@ -405,12 +423,12 @@ void Obsrv()
 		{
 			if (witem[i].plc)
 			{
-				msg.print("You saw a %s on your %s.\n",
+				msg.print("You saw a %s on your %s.",
 						  GetItemNm(witem[i].id), GetDirNm(GetDir(player.p, witem[i].p)));
 			}
 			else
 			{
-				msg.print("You saw %s x%d dropped on your %s.\n",
+				msg.print("You saw %s x%d dropped on your %s.",
 						  GetItemNm(witem[i].id), witem[i].amt,
 						  GetDirNm(GetDir(player.p, witem[i].p)));
 			}
@@ -420,14 +438,14 @@ void Obsrv()
 	{
 		if (mob[i].id && (dist = player.p + mob[i].p) <= plsrng && !IsColls(player.p, mob[i].p))
 		{
-			msg.print("You saw a %s(%d/%d) on your %s.\n", mob[i].name(),
+			msg.print("You saw a %s(%d/%d) on your %s.", mob[i].name(),
 					  mob[i].health, mob[i].maxhlth, GetDirNm(GetDir(player.p, mob[i].p)));
 			mfnd = 1;
 		}
 	}
 	if (!mfnd)
 	{
-		msg.print("You saw nobody.\n");
+		msg.print("You saw nobody.");
 	}
 	else
 	{
@@ -437,6 +455,7 @@ void Obsrv()
 
 int prtmb(int rng)
 {
+	move(scr_h - msgh - comh, 0);
 	int no = 0, cnum[mobn];
 	for (int i = 0; i < mobn; i++)
 	{
@@ -456,11 +475,23 @@ int prtmb(int rng)
 	for (int j = 0; j < no; j++)
 	{
 		int i = cnum[j];
-		msg.print
-			("%d. %s lv.%d (%d/%d)\n",
-			 j + 1, mob[i].name(), mob[i].lvl, mob[i].health, mob[i].maxhlth);
+		printw("%d. %s lv.%d (%d/%d)", j + 1, mob[i].name(), mob[i].lvl, mob[i].health,
+			   mob[i].maxhlth);
+		if (j % 2)
+		{
+			printw("\n");
+		}
+		else
+		{
+			move(cy(), 30);
+		}
 	}
-	msg.print("Enter number to select, 0 to cancel.\n");
+	if (no % 2)
+	{
+		printw("\n");
+	}
+	mvprintw(scr_h - msgh - 2, 0, "Enter number to select, 0 to cancel.\n");
+	refresh();
 	int tmp = InputNum(no);
 	if (tmp == 0)
 	{
@@ -679,13 +710,6 @@ const char GetItemChar(int id)
 	}
 }
 
-void prtile(char c, int attn)
-{
-	attron(attr[attn]);
-	printw("%c ", c);
-	attroff(attr[attn]);
-}
-
 void prthmp()
 {
 	clear();
@@ -771,7 +795,7 @@ void prtfmp(int rng)
 
 void prtmp(int rng)
 {
-	int mf = 0, fi = 0, plsrng = player.GetSrng(),tmx=cx();
+	int mf = 0, fi = 0, plsrng = player.GetSrng(), tmx = cx();
 	for (int ty = player.p.y - rng; ty <= player.p.y + rng; ty++)
 	{
 		for (int tx = player.p.x - rng; tx <= player.p.x + rng; tx++)
@@ -824,13 +848,13 @@ void prtmp(int rng)
 			}
 			prtile(GetBlkChar(blk[blki(tx, ty)]), GetBlkCol(blk[blki(tx, ty)]));
 		}
-		move(cy()+1,tmx);
+		move(cy() + 1, tmx);
 	}
 }
 
 void prtime()
 {
-	msg.print("Showing the time\nDay %d Year %d\nTime:%d:%02d\n", tm.d, tm.d / 360, tm.h, tm.m);
+	msg.print("Showing the time\nDay %d Year %d\nTime:%d:%02d", tm.d, tm.d / 360, tm.h, tm.m);
 }
 
 void prtsinv(int n)
@@ -849,13 +873,13 @@ void prtsinv(int n)
 void prtinv()
 {
 	printw("Inventory\nLeft hand");
-	mvprintw(1,scr_w-10,"Right hand");
+	mvprintw(1, scr_w - 10, "Right hand");
 	prtsinv(0);
-	move(2,0.6*scr_w);
+	move(2, 0.6 * scr_w);
 	prtsinv(1);
-	mvprintw(3,0,"Wearings");
-	mvprintw(3,scr_w-11,"Accessories");
-	move(4,0);
+	mvprintw(3, 0, "Wearings");
+	mvprintw(3, scr_w - 11, "Accessories");
+	move(4, 0);
 	for (int i = 2; i < 6; i++)
 	{
 		switch (i)
@@ -874,21 +898,23 @@ void prtinv()
 			break;
 		}
 		prtsinv(i);
-		move(cy(), 0.6*scr_w);
+		move(cy(), 0.6 * scr_w);
 		prtsinv(i + 4);
 		printw("\n");
 	}
 	printw("Items\n");
 	for (int i = 10; i < 30; i++)
 	{
-		move(cy(),scr_w*0.3*((i-1)%3));
+		move(cy(), scr_w * 0.3 * ((i - 1) % 3));
 		prtsinv(i);
-		if (!(i%3))
+		if (!(i % 3))
 		{
 			printw("\n");
 		}
 	}
 	printw("\n");
+	msg.Init(ctop(0, scr_h - msgh), ctop(scr_w - 1, scr_h - 1));
+	msg.Show();
 }
 
 void prtcrash()
@@ -909,13 +935,13 @@ void prtwst()
 	}
 	for (int i = 0; i < 17; i++)
 	{
-		msg.print("%s: %.2f\n", GetBlkNm(i), 100 * n[i] / (wlth * wlth));
+		msg.print("%s: %.2f", GetBlkNm(i), 100 * n[i] / (wlth * wlth));
 	}
 }
 
 void prtst()
 {
-	msg.print
+	printw
 		("Showing %s's stat\npos: x:%ld y:%ld\nhealth:%d/%d\nlevel:%d exp:%d\natk:%d\ndef:%d\nrng:%d\nsrng:%d\n",
 		 player.name, player.p.x, player.p.y, player.health,
 		 player.maxhlth, player.lvl, player.exp, player.GetAtk(0),
@@ -924,7 +950,7 @@ void prtst()
 
 void prtmst(int n)
 {
-	msg.print
+	printw
 		("Showing mob #%d's stat\nste:%d tgt:%d lst:%d\nName:%s\nid:%d\nHealth:%d/%d\nAtk:%d\nDef:%d\nRange:%d\nSrange:%d\nlvl:%d\npos: x:%ld y:%ld\n",
 		 n, mob[n].ste, mob[n].tgt, mob[n].lst, mob[n].name(),
 		 mob[n].id, mob[n].health, mob[n].maxhlth,

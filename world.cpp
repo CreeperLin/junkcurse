@@ -2,7 +2,7 @@
 using namespace std;
 void CWorld::EraUpdate()
 {
-	msg.print("Era %d has come.\n",++era);
+	msg.print("Era %d has come.",++era);
 	switch (era)
 	{
 		case 0:
@@ -41,7 +41,7 @@ void CWorld::Init()
 {
 	sprintf(name, "World 1");
 	seed = time(0);
-	msg.print("seed %ld\n", seed);
+	msg.print("seed %ld", seed);
 	srand(seed);
 }
 
@@ -105,13 +105,13 @@ int CWorld::Chop()
 		}
 		else
 		{
-			msg.print("You've got nothing.\n");
+			msg.print("You've got nothing.");
 		}
 		tm.Adj(20, 0, 0);
 		Refresh();
 		return 1;
 	}
-	msg.print("There's nothing for you to chop.\n");
+	msg.print("There's nothing for you to chop.");
 	return 0;
 }
 
@@ -128,7 +128,7 @@ int CWorld::Pick()
 		}
 		else
 		{
-			msg.print("You've got nothing.\n");
+			msg.print("You've got nothing.");
 		}
 		tm.Adj(20, 0, 0);
 		return 1;
@@ -141,13 +141,13 @@ int CWorld::Pick()
 		}
 		else
 		{
-			msg.print("You've got nothing.\n");
+			msg.print("You've got nothing.");
 		}
 		tm.Adj(20, 0, 0);
 		Refresh();
 		return 1;
 	}
-	msg.print("There's nothing for you to pick.\n");
+	msg.print("There's nothing for you to pick.");
 	return 0;
 }
 
@@ -170,13 +170,13 @@ int CWorld::Dig()
 		}
 		else
 		{
-			msg.print("You've got nothing.\n");
+			msg.print("You've got nothing.");
 		}
 		tm.Adj(20, 0, 0);
 		Refresh();
 		return 1;
 	}
-	msg.print("There's nothing for you to dig.\n");
+	msg.print("There's nothing for you to dig.");
 	return 0;
 }
 
@@ -225,19 +225,19 @@ int CWorld::EventUpdate()
 			switch (tid)
 			{
 			case 1:
-				msg.print("The rain has stopped.\n");
+				msg.print("The rain has stopped.");
 				break;
 			case 2:
-				msg.print("The torrent has stopped.\n");
+				msg.print("The torrent has stopped.");
 				break;
 			case 3:
-				msg.print("The snow has stopped.\n");
+				msg.print("The snow has stopped.");
 				break;
 			case 4:
-				msg.print("Your sight were widened as the mist lifted.\n");
+				msg.print("Your sight were widened as the mist lifted.");
 				break;
 			case 5:
-				msg.print("The sky stopped roaring.\n");
+				msg.print("The sky stopped roaring.");
 				break;
 			}
 		}
@@ -287,19 +287,19 @@ void CWorld::AddEvent(int nid, int nintv)
 			switch (nid)
 			{
 			case 1:
-				msg.print("The Rain began to fall.\n");
+				msg.print("The Rain began to fall.");
 				break;
 			case 2:
-				msg.print("The water is pouring from the sky.\n");
+				msg.print("The water is pouring from the sky.");
 				break;
 			case 3:
-				msg.print("Millions of snowflakes.\n");
+				msg.print("Millions of snowflakes.");
 				break;
 			case 4:
-				msg.print("The world was shrouded in mist\n");
+				msg.print("The world was shrouded in mist");
 				break;
 			case 5:
-				msg.print("The sky began to roar.\n");
+				msg.print("The sky began to roar.");
 				break;
 			}
 			return;
@@ -369,18 +369,18 @@ void CWorld::EventProducer()
 				{
 					AdjGaP(pcwd, 10);
 					AdjGaP(ppbr, 5);
-					msg.print("The Rain has brought growth to the world.\n");
+					msg.print("The Rain has brought growth to the world.");
 				}
 				else if (nrain >= 3)
 				{
 					AdjGaP(ppbr, -15);
 					AdjGaP(ppa, -15);
-					msg.print("Plants are dying for water.\n");
+					msg.print("Plants are dying for water.");
 				}
 				break;
 			case 3:
 				AdjGaP(ppa, 20);
-				msg.print("Time to harvest.\n");
+				msg.print("Time to harvest.");
 				break;
 			}
 			nievt = 0;

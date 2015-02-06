@@ -50,11 +50,11 @@ int KeyEvent()
 	{
 		if (player.isrun)
 		{
-			msg.print("You slowed down.\n");
+			msg.print("You slowed down.");
 		}
 		else
 		{
-			msg.print("You started to run.\n");
+			msg.print("You started to run.");
 		}
 		player.isrun = !player.isrun;
 	}
@@ -76,7 +76,7 @@ int KeyEvent()
 	}
 	else if (ch == key[15])
 	{
-		msg.print("You rested for a while.\n");
+		msg.print("You rested for a while.");
 		player.Adjhlth(5,0,0);
 		player.Adjmana(5,0,0);
 		tm.Adj(4, 0, 0);

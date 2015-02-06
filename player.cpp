@@ -112,7 +112,7 @@ void CPlayer::Kill()
 				int atype = GetAmmoType(wid);
 				if (GetInvAmt(atype) <= 10)
 				{
-					msg.print("Low on ammo\n");
+					msg.print("Low ammo\n");
 				}
 				DecInv(atype, 1);
 			}
@@ -174,7 +174,8 @@ void CPlayer::Talk()
 	case 0:
 		break;
 	case 1:
-		msg.print("You:\n1.Buy\n2.Sell\n0.Leave\n");
+		printw("You:\n1.Buy\n2.Sell\n0.Leave\n");
+		refresh();
 		sel = InputNum(2);
 		switch (sel)
 		{
@@ -208,7 +209,8 @@ void CPlayer::Inv()
 		{
 			return;
 		}
-		msg.print("Enter number to select,0 to exit.\n");
+		printw("Enter number to select,0 to exit.\n");
+		refresh();
 		tmpi = InputNum(30);
 		if (tmpi == 0)
 		{
@@ -227,8 +229,8 @@ void CPlayer::Inv()
 	int ttp = slot[tmpi].type();
 	while (1)
 	{
-		msg.print
-			("1.use 2.place 3.equip/dequip 4.grab 5.throw 6.adapt 7.decraft\n0.exit.\n");
+		printw("1.use 2.place 3.equip/dequip 4.grab 5.throw 6.adapt 7.decraft\n0.exit.\n");
+		refresh();
 		int tmpfx = InputNum(8);
 		if (tmpfx == 0)
 		{
@@ -390,11 +392,12 @@ void CPlayer::Inv()
 				}
 				else
 				{
-					msg.print("Which one would you like to switch?\n");
+					printw("Which one would you like to switch?\n");
 					prtsinv(0);
-					msg.print("\n");
+					printw("\n");
 					prtsinv(1);
-					msg.print("\n0.cancel\n");
+					printw("\n0.cancel\n");
+					refresh();
 					int ipt = InputNum(2);
 					if (!ipt)
 					{
@@ -410,7 +413,7 @@ void CPlayer::Inv()
 				int tmpta = 0;
 				if (tia > 1)
 				{
-					msg.print("Enter amount, or 0 to cancel(total %d).\n", tia);
+					printw("Enter amount, or 0 to cancel(total %d).\n", tia);
 					tmpta = InputNum(tia);
 					if (tmpta == 0)
 					{
@@ -432,7 +435,8 @@ void CPlayer::Inv()
 				prtinv();
 				while (1)
 				{
-					msg.print("Enter number to select object,0 to exit.\n");
+					printw("Enter number to select object,0 to exit.\n");
+					refresh();
 					tpi = InputNum(30);
 					if (tpi == 0)
 					{
@@ -462,16 +466,17 @@ void CPlayer::Inv()
 		case 7:
 			{
 				int no = 1;
-				msg.print("1.all\n");
+				printw("1.all\n");
 				for (int i = 1; i < pnum; i++)
 				{
 					if (slot[tmpi].pid[i])
 					{
-						msg.print("%d.%d x%d\n", ++no, slot[tmpi].pid[i],
+						printw("%d.%d x%d\n", ++no, slot[tmpi].pid[i],
 							   slot[tmpi].pamt[i]);
 					}
 				}
-				msg.print("0.exit\n");
+				printw("0.exit\n");
+				refresh();
 				int ipt = InputNum(no);
 				switch (ipt)
 				{

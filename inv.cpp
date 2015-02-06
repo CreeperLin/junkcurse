@@ -9,7 +9,7 @@ int inv::Decraft(int n)
 		pamt[n] = 0;
 		return 1;
 	}
-	msg.print("cannot decraft.\n");
+	msg.print("cannot decraft.");
 	return 0;
 }
 
@@ -29,7 +29,7 @@ int inv::Decrafta()
 		Adj(-1);
 		return 1;
 	}
-	msg.print("cannot decraft.\n");
+	msg.print("cannot decraft.");
 	return 0;
 }
 
@@ -37,7 +37,7 @@ int inv::Adapt(int cnum)
 {
 	if (!player.slot[cnum].IsAdable(id))
 	{
-		msg.print("cannot adapt.\n");
+		msg.print("cannot adapt.");
 		return 0;
 	}
 	for (int i = 1; i < pnum; i++)
@@ -58,7 +58,7 @@ int inv::Adapt(int cnum)
 		Adj(-1);
 		return 1;
 	}
-	msg.print("cannot adapt more.\n");
+	msg.print("cannot adapt more.");
 	return 0;
 }
 

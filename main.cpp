@@ -21,7 +21,7 @@ int main()
 				continue;
 			}
 		}
-		msg.Init(ctop(0,scr_h-8),ctop(scr_w-1,scr_h-1));
+		msg.Init(ctop(0,scr_h-msgh),ctop(scr_w-1,scr_h-1));
 		msg.ena=0;
 		while (1)
 		{
@@ -34,6 +34,7 @@ int main()
 			}
 			if (player.health <= 0)
 			{
+				prthud();
 				delay(2);
 				prtpldth();
 				int trspn = InputNum(1);
@@ -46,7 +47,7 @@ int main()
 				}
 				clear();
 				prthud();
-				msg.print("You woke up in the %s.\n",
+				msg.print("You woke up in the %s.",
 					   GetBlkNm(blk[player.p.geti()]));
 				SetSpnEnv();
 			}
@@ -68,7 +69,7 @@ void Refresh()
 		{
 			if (player.p + mob[i].p > 100)
 			{
-				msg.print("A %s has been wiped out\n", mob[i].name());
+				//msg.print("A %s has been wiped out", mob[i].name());
 				mob[i].Reset();
 			}
 		}

@@ -64,9 +64,10 @@ void MsgBox::Show()
 	getyx(stdscr, ty, tx);
 	Wipe();
 	DrawBodr();
+	move(p1.y, p1.x);
 	for (int i = 0; i < mxmsg; i++)
 	{
-		move(p1.y + i + 1, p1.x);
+		move(cy() + 1, p1.x);
 		msg[i].print();
 	}
 	move(ty, tx);
@@ -82,6 +83,38 @@ void MsgBox::Clear()
 
 void MsgBox::SetPos(pos np1, pos np2)
 {
+	if (np1.x < 0)
+	{
+		np1.x = 0;
+	}
+	else if (np1.x >= scr_w)
+	{
+		np1.x = scr_w - 1;
+	}
+	if (np1.y < 0)
+	{
+		np1.y = 0;
+	}
+	else if (np1.y >= scr_h)
+	{
+		np1.y = scr_h - 1;
+	}
+	if (np2.x < 0)
+	{
+		np2.x = 0;
+	}
+	else if (np2.x >= scr_w)
+	{
+		np2.x = scr_w - 1;
+	}
+	if (np2.y < 0)
+	{
+		np2.y = 0;
+	}
+	else if (np2.y >= scr_h)
+	{
+		np2.y = scr_h - 1;
+	}
 	p1 = np1;
 	p2 = np2;
 }

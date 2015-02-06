@@ -7,7 +7,7 @@ void GenVillages(int num)
 	do
 	{
 		cp.Set(randr(700, 1400), randr(700, 1400));
-		// msg.print("%d tol %d trys %d,%d.\n",tol,trys,cp.x,cp.y);
+		// msg.print("%d tol %d trys %d,%d.",tol,trys,cp.x,cp.y);
 		if (!IsRegClear(ctop(cp.x - 6, cp.y - 6), 13, 13, 1)
 			|| !(IsBlkArnd(cp, 10, 3) || IsBlkArnd(cp, 10, 4))
 			|| cp + player.p < 100)
@@ -16,7 +16,7 @@ void GenVillages(int num)
 			{
 				trys = 0;
 				tol++;
-				msg.print("skipped.\n");
+				msg.print("skipped.");
 			}
 			if (tol > 100000)
 			{
@@ -27,10 +27,10 @@ void GenVillages(int num)
 		trys = 0;
 		GenVillage(cp);
 		tol++;
-		msg.print("Village %d generated at %d,%d.\n", ++suc, cp.x, cp.y);
+		msg.print("Village %d generated at %d,%d.", ++suc, cp.x, cp.y);
 	}
 	while (suc < num);
-	msg.print("total trys %d suc %d\n", tol, suc);
+	msg.print("total trys %d suc %d", tol, suc);
 }
 
 void GenVillage(pos cp)
@@ -614,7 +614,7 @@ void SetReg(pos p, unsigned int l, unsigned int w, int nid)
 			}
 			else
 			{
-				msg.print("leak %d\n", nid);
+				msg.print("leak %d", nid);
 			}
 		}
 	}

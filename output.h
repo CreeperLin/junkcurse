@@ -1,6 +1,8 @@
 #ifndef _OUTPUT_H_
 #define _OUTPUT_H_
 extern int scr_w, scr_h;
+int cx();
+int cy();
 void printwr(const char *ch, ...);
 void printwr(int attn, const char *ch, ...);
 void initattr();

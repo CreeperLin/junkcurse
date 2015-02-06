@@ -114,29 +114,31 @@ int prtcr()
 		if ((maxa[no] = GetCrMaxa()) > 0)
 		{
 			num[no] = i;
-			printf("%d.%s\n", ++no, GetItemNm(i));
+			printw("%d.%s\n", ++no, GetItemNm(i));
 			for (int j = 0; j < maxi; j++)
 			{
 				if (Iid[j])
 				{
-					printf("%s x%2d  ", GetItemNm(Iid[j]), Iamt[j]);
+					printw("%s x%2d  ", GetItemNm(Iid[j]), Iamt[j]);
 				}
 			}
-			printf("\n");
+			printw("\n");
 		}
 	}
 	if (!no)
 	{
-		printf("There' s nothing you can craft.\n");
+		msg.print("There' s nothing you can craft.");
 		return 0;
 	}
-	printf("Enter number to select, or 0 to cancel.\n");
+	printw("Enter number to select, or 0 to cancel.\n");
+	refresh();
 	int tmpc = InputNum(no);
 	if (tmpc == 0)
 	{
 		return 0;
 	}
-	printf("Enter amount(max %d), or 0 to cancel.\n", maxa[tmpc - 1]);
+	printw("Enter amount(max %d), or 0 to cancel.\n", maxa[tmpc - 1]);
+	refresh();
 	int namt = InputNum(maxa[tmpc - 1]);
 	if (namt == 0)
 	{
