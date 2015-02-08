@@ -8,7 +8,7 @@ void CPlayer::Collect()
 	{
 		if (witem[i].id && !witem[i].plc && witem[i].p + p <= 2)
 		{
-			msg.print("You picked up %s x%d.\n", GetItemNm(witem[i].id),
+			msg.print("You picked up %s x%d.", GetItemNm(witem[i].id),
 				   witem[i].amt);
 			AddInv(witem[i].id, witem[i].amt, witem[i].lvl, witem[i].mod);
 			witem[i].Reset();
@@ -17,7 +17,7 @@ void CPlayer::Collect()
 	}
 	if (!isrmv)
 	{
-		msg.print("You picked up nothing.\n");
+		msg.print("You picked up nothing.");
 		return;
 	}
 	tm.Adj(1, 0, 0);
@@ -31,20 +31,20 @@ void CPlayer::Remove()
 	{
 		if (witem[i].id && witem[i].plc && witem[i].p == p)
 		{
-			msg.print("You removed a %s.\n", GetItemNm(witem[i].id));
+			msg.print("You removed a %s.", GetItemNm(witem[i].id));
 			AddInv(witem[i].id, 1, 0, 0);
 			witem[i].Reset();
 			if (spn == p && spn != world.wspn)
 			{
 				spn = world.wspn;
-				msg.print("Spawnpoint Reset!\n");
+				msg.print("Spawnpoint Reset!");
 			}
 			isrmv = 1;
 		}
 	}
 	if (!isrmv)
 	{
-		msg.print("You removed nothing.\n");
+		msg.print("You removed nothing.");
 		return;
 	}
 	tm.Adj(1, 0, 0);
@@ -64,7 +64,7 @@ void CPlayer::Kill()
 			{
 				ptgt = 0;
 			}
-			msg.print("Can't reach that.\n");
+			msg.print("Can't reach that.");
 			return;
 		}
 	}
@@ -76,7 +76,7 @@ void CPlayer::Kill()
 		{
 			if (tmpn == -1)
 			{
-				msg.print("There's no one for you to kill.\n");
+				msg.print("There's no one for you to kill.");
 			}
 			return;
 		}
@@ -112,7 +112,7 @@ void CPlayer::Kill()
 				int atype = GetAmmoType(wid);
 				if (GetInvAmt(atype) <= 10)
 				{
-					msg.print("Low ammo\n");
+					msg.print("Low ammo");
 				}
 				DecInv(atype, 1);
 			}
@@ -164,7 +164,7 @@ void CPlayer::Talk()
 	{
 		if (tnum == -1)
 		{
-			msg.print("There's no one to talk to.\n");
+			msg.print("There's no one to talk to.");
 		}
 		return;
 	}
@@ -174,7 +174,8 @@ void CPlayer::Talk()
 	case 0:
 		break;
 	case 1:
-		printw("You:\n1.Buy\n2.Sell\n0.Leave\n");
+		CmdInit();
+	printw("You:\n1.Buy\n2.Sell\n0.Leave\n");
 		refresh();
 		sel = InputNum(2);
 		switch (sel)
@@ -209,6 +210,7 @@ void CPlayer::Inv()
 		{
 			return;
 		}
+		CmdInit();
 		printw("Enter number to select,0 to exit.\n");
 		refresh();
 		tmpi = InputNum(30);
@@ -220,7 +222,7 @@ void CPlayer::Inv()
 		tiid = slot[tmpi].id;
 		if (!tiid)
 		{
-			msg.print("You've select nothing.\n");
+			msg.print("You've select nothing.");
 			continue;
 		}
 		break;
@@ -229,7 +231,8 @@ void CPlayer::Inv()
 	int ttp = slot[tmpi].type();
 	while (1)
 	{
-		printw("1.use 2.place 3.equip/dequip 4.grab 5.throw 6.adapt 7.decraft\n0.exit.\n");
+		CmdInit();
+		printw("1.use 2.place 3.equip/dequip\n4.grab 5.throw 6.adapt 7.decraft 0.exit.\n");
 		refresh();
 		int tmpfx = InputNum(8);
 		if (tmpfx == 0)
@@ -254,7 +257,7 @@ void CPlayer::Inv()
 				}
 				else
 				{
-					msg.print("Can't do that.\n");
+					msg.print("Can't do that.");
 					continue;
 				}
 			}
@@ -263,18 +266,18 @@ void CPlayer::Inv()
 		case 2:
 			if (ttp != 2)
 			{
-				msg.print("Can't do that.\n");
+				msg.print("Can't do that.");
 				continue;
 			}
 			if (IsBlkPlc(blk[p.geti()]) && !IsItemNear(p, 1))
 			{
 				AddItem(tiid, 1, 0, 0, 1, p);
-				msg.print("You've placed a %s.\n", GetItemNm(slot[tmpi].id));
+				msg.print("You've placed a %s.", GetItemNm(slot[tmpi].id));
 				slot[tmpi].Adj(-1);
 			}
 			else
 			{
-				msg.print("Can't be placed.\n");
+				msg.print("Can't be placed.");
 				continue;
 			}
 			break;
@@ -282,7 +285,7 @@ void CPlayer::Inv()
 			if (tmpi > 1 && tmpi < 10)
 			{
 				Unequip(tmpi);
-				msg.print("You took your %s off.\n", GetItemNm(tiid));
+				msg.print("You took your %s off.", GetItemNm(tiid));
 			}
 			else
 			{
@@ -293,7 +296,7 @@ void CPlayer::Inv()
 				case 5:
 				case 6:
 					SwapInv(ttp - 1, tmpi);
-					msg.print("You put %s on.\n", GetItemNm(tiid));
+					msg.print("You put %s on.", GetItemNm(tiid));
 					break;
 				case 7:
 					{
@@ -303,7 +306,7 @@ void CPlayer::Inv()
 							if (!slot[i].id)
 							{
 								SwapInv(i, tmpi);
-								msg.print("You equipped %s.\n", GetItemNm(tiid));
+								msg.print("You equipped %s.", GetItemNm(tiid));
 								iseq = 1;
 								break;
 							}
@@ -311,12 +314,12 @@ void CPlayer::Inv()
 						if (!iseq)
 						{
 							SwapInv(randr(6, 9), tmpi);
-							msg.print("You equipped %s.\n", GetItemNm(tiid));
+							msg.print("You equipped %s.", GetItemNm(tiid));
 						}
 					}
 					break;
 				default:
-					msg.print("Can't do that.\n");
+					msg.print("Can't do that.");
 					continue;
 				}
 			}
@@ -325,7 +328,7 @@ void CPlayer::Inv()
 			if (tmpi < 2)
 			{
 				Unequip(tmpi);
-				msg.print("You've took %s x%d back.\n", GetItemNm(tiid), tia);
+				msg.print("You've took %s x%d back.", GetItemNm(tiid), tia);
 				break;
 			}
 			if (!slot[0].id)
@@ -392,6 +395,7 @@ void CPlayer::Inv()
 				}
 				else
 				{
+					CmdInit();
 					printw("Which one would you like to switch?\n");
 					prtsinv(0);
 					printw("\n");
@@ -406,13 +410,14 @@ void CPlayer::Inv()
 					SwapInv(ipt - 1, tmpi);
 				}
 			}
-			msg.print("You grabbed %s x%d in your hand.\n", GetItemNm(tiid), tia);
+			msg.print("You grabbed %s x%d in your hand.", GetItemNm(tiid), tia);
 			break;
 		case 5:
 			{
 				int tmpta = 0;
 				if (tia > 1)
 				{
+					CmdInit();
 					printw("Enter amount, or 0 to cancel(total %d).\n", tia);
 					tmpta = InputNum(tia);
 					if (tmpta == 0)
@@ -424,7 +429,7 @@ void CPlayer::Inv()
 				{
 					tmpta = tia;
 				}
-				msg.print("You've thrown %s x%d away.\n", GetItemNm(tiid), tmpta);
+				msg.print("You've thrown %s x%d away.", GetItemNm(tiid), tmpta);
 				AddItem(tiid, tmpta, slot[tmpi].lvl, slot[tmpi].mod, 0, p);
 				slot[tmpi].Adj(-tmpta);
 				break;
@@ -435,6 +440,7 @@ void CPlayer::Inv()
 				prtinv();
 				while (1)
 				{
+					CmdInit();
 					printw("Enter number to select object,0 to exit.\n");
 					refresh();
 					tpi = InputNum(30);
@@ -445,13 +451,13 @@ void CPlayer::Inv()
 					tpi--;
 					if (tpi == tmpi)
 					{
-						msg.print("cannot adapt self.\n");
+						msg.print("cannot adapt self.");
 						continue;
 					}
 					tpid = slot[tpi].id;
 					if (!tpid)
 					{
-						msg.print("You've select nothing.\n");
+						msg.print("You've select nothing.");
 						continue;
 					}
 					break;
@@ -460,12 +466,13 @@ void CPlayer::Inv()
 				{
 					continue;
 				}
-				msg.print("adapted.\n");
+				msg.print("adapted.");
 				break;
 			}
 		case 7:
 			{
 				int no = 1;
+				CmdInit();
 				printw("1.all\n");
 				for (int i = 1; i < pnum; i++)
 				{
@@ -514,7 +521,7 @@ void CPlayer::Qhlth()
 {
 	if (health == maxhlth)
 	{
-		msg.print("You don't need any food.\n");
+		msg.print("You don't need any food.");
 		return;
 	}
 	for (int i = 0; i < 30; i++)
@@ -529,14 +536,14 @@ void CPlayer::Qhlth()
 			return;
 		}
 	}
-	msg.print("there's nothing to eat.\n");
+	msg.print("there's nothing to eat.");
 }
 
 void CPlayer::Qmana()
 {
 	if (mp == mxmp)
 	{
-		msg.print("You don't need any food.\n");
+		msg.print("You don't need any food.");
 		return;
 	}
 	for (int i = 0; i < 30; i++)
@@ -551,7 +558,7 @@ void CPlayer::Qmana()
 			return;
 		}
 	}
-	msg.print("there's nothing to eat.\n");
+	msg.print("there's nothing to eat.");
 }
 
 int CPlayer::IsGrab(int nid)
@@ -602,7 +609,7 @@ int CPlayer::GetAtk(int n)
 			int atype = GetAmmoType(wid);
 			if (!GetInvAmt(atype))
 			{
-				msg.print("Out of ammo.\n");
+				msg.print("Out of ammo.");
 				return 0;
 			}
 			return ratk + watk + GetItemAdmg(atype);
@@ -612,7 +619,7 @@ int CPlayer::GetAtk(int n)
 		{
 			return watk;
 		}
-		msg.print("Out of mana.\n");
+		msg.print("Out of mana");
 		return 0;
 	}
 	return matk + watk;
@@ -751,7 +758,7 @@ void CPlayer::AddExp(int aexp)
 {
 	int tlmt = 0;
 	exp += aexp;
-	msg.print("You gained %d exp points.\n", aexp);
+	msg.print("You gained %d exp points.", aexp);
 	while (1)
 	{
 		tlmt = 30 * (1 + 0.5 * lvl * lvl);
@@ -761,7 +768,7 @@ void CPlayer::AddExp(int aexp)
 		}
 		exp -= tlmt;
 		lvl++;
-		msg.print("Level up!\n");
+		msg.print("Level up!");
 		maxhlth = 100 + 10 * lvl;
 		health = maxhlth;
 		mxmp = 20 + 10 * lvl;
@@ -811,7 +818,7 @@ void CPlayer::Sleep()
 		}
 		if (hme)
 		{
-			msg.print("You lay down and fell asleep...\n");
+			msg.print("You lay down and fell asleep...");
 			delay(2);
 			spn = p;
 			health = maxhlth;
@@ -823,18 +830,18 @@ void CPlayer::Sleep()
 			tm.h = 6;
 			tm.m = 0;
 			tm.Exchg();
-			msg.print("You were woken up by the morning light.\n");
+			msg.print("You were woken up by the morning light.");
 			Refresh();
 			return;
 		}
 		else
 		{
-			msg.print("You can't sleep in the wild.\n");
+			msg.print("You can't sleep in the wild.");
 		}
 	}
 	else
 	{
-		msg.print("Stop daydreaming.\n");
+		msg.print("Stop daydreaming.");
 	}
 }
 
@@ -901,18 +908,18 @@ void CPlayer::AddInv(int stn, int nid, int namt, int nlvl, int nmod)
 	}
 	if (toamt == namt)
 	{
-		msg.print("You can take no more thing, dropped %s x%d.\n", GetItemNm(nid),
+		msg.print("You can take no more thing, dropped %s x%d.", GetItemNm(nid),
 			   namt);
 	}
 	else
 	{
-		msg.print("You can only take %s x%d, dropped %d.\n", GetItemNm(nid),
+		msg.print("You can only take %s x%d, dropped %d.", GetItemNm(nid),
 			   toamt - namt, namt);
 	}
 	AddItem(nid, namt, nlvl, nmod, 0, p);
 	return;
   ext:
-	msg.print("You've got %s x%d.\n", GetItemNm(nid), toamt);
+	msg.print("You've got %s x%d.", GetItemNm(nid), toamt);
 }
 
 void CPlayer::AddInv(int nid, int namt, int nlvl, int nmod)
@@ -958,18 +965,18 @@ void CPlayer::AddInv(int nid, int namt, int nlvl, int nmod)
 	}
 	if (toamt == namt)
 	{
-		msg.print("You can take no more thing, dropped %s x%d.\n", GetItemNm(nid),
+		msg.print("You can take no more thing, dropped %s x%d.", GetItemNm(nid),
 			   namt);
 	}
 	else
 	{
-		msg.print("You can only take %s x%d, dropped %d.\n", GetItemNm(nid),
+		msg.print("You can only take %s x%d, dropped %d.", GetItemNm(nid),
 			   toamt - namt, namt);
 	}
 	AddItem(nid, namt, nlvl, nmod, 0, p);
 	return;
   ext:
-	msg.print("You've got %s x%d.\n", GetItemNm(nid), toamt);
+	msg.print("You've got %s x%d.", GetItemNm(nid), toamt);
 }
 
 void CPlayer::DecInv(int nid, int namt)
@@ -1021,7 +1028,7 @@ void CPlayer::Move(int n)
 	{
 		if (IsCollp(n))
 		{
-			msg.print("blocked\n");
+			msg.print("blocked");
 			break;
 		}
 		p.move(n, 1);
@@ -1063,5 +1070,5 @@ void SetPlpos()
 			break;
 		}
 	}
-	msg.print("You woke up in the %s.\n", GetBlkNm(tmp));
+	msg.print("You woke up in the %s.", GetBlkNm(tmp));
 }
