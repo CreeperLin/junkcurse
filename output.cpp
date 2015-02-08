@@ -152,7 +152,7 @@ void prtadjm(int n, int sbj, int evt, int obj)
 	default:
 		return;
 	}
-	msg.print(", mana %+d.", n);
+	msg.add(", mana %+d.", n);
 }
 
 void prtadjh(int n, int sbj, int evt, int obj)
@@ -196,7 +196,7 @@ void prtadjh(int n, int sbj, int evt, int obj)
 	default:
 		return;
 	}
-	msg.print(", health %+d.", n);
+	msg.add(", health %+d.", n);
 }
 
 void prtdmsg(int sbj, int evt, int obj)
