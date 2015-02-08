@@ -423,6 +423,17 @@ int GetPara()
 	return atoi(tc);
 }
 
+void CmdInit()
+{
+	int sy=scr_h-msgh-comh;
+	for (int cy=sy;cy<scr_h-msgh;cy++)
+	{
+		move(cy,0);
+		clrtoeol();
+	}
+	move(sy,0);
+}
+
 int InputNum(int max)
 {
 	int cx, cy;
