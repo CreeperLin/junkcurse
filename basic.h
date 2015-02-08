@@ -4,6 +4,7 @@ int GameStart();
 int Command();
 void GReset();
 int GetPara();
+void CmdInit();
 int InputNum(int max);
 int AtkCnt(int told, int def, int cc);
 int SplashDmg(pos cp,pos np,int rng,int dmg);
