@@ -289,7 +289,7 @@ int Command()
 			if (witem[i].id)
 			{
 				printw("%d %s x%d %ld,%ld\n", i,
-						  GetItemNm(witem[i].id), witem[i].amt, witem[i].p.x, witem[i].p.y);
+					   GetItemNm(witem[i].id), witem[i].amt, witem[i].p.x, witem[i].p.y);
 			}
 		}
 		refresh();
@@ -425,23 +425,21 @@ int GetPara()
 
 void CmdInit()
 {
-	int sy=scr_h-msgh-comh;
-	for (int cy=sy;cy<scr_h-msgh;cy++)
+	int sy = scr_h - msgh - comh;
+	for (int cy = sy; cy < scr_h - msgh; cy++)
 	{
-		move(cy,0);
+		move(cy, 0);
 		clrtoeol();
 	}
-	move(sy,0);
+	move(sy, 0);
 }
 
 int InputNum(int max)
 {
-	int cx, cy;
-	getyx(stdscr, cy, cx);
 	while (1)
 	{
 		int n;
-		move(cy, cx);
+		move(scr_h - msgh - 1, 0);
 		clrtoeol();
 		printw(">");
 		echo();
