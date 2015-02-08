@@ -156,5 +156,5 @@ void MsgBox::add(const char *msgs, ...)
 	va_start(arg, msgs);
 	vsprintf(tmpt, msgs, arg);
 	va_end(arg);
-	strcat(msg[cmsg].text, tmpt);
+	strcat(msg[cmsg-1].text, tmpt);
 }
