@@ -27,5 +27,6 @@ class MsgBox
 	void SetPos(pos np1, pos np2);
 	void Scroll(int n);
 	void print(const char *msgs, ... );
+	void add(const char *msgs, ... );
 };
 #endif
