@@ -24,16 +24,10 @@ void MsgBox::Reset()
 
 void MsgBox::Wipe()
 {
-	move(p1.y, p1.x);
-	int y = 0, x = 0;
-	while (1)
+	for (int ny = p1.y; ny <= p2.y; ny++)
 	{
-		printw(" ");
-		getyx(stdscr, y, x);
-		if (x == p2.x && y == p2.y)
-		{
-			return;
-		}
+		move(ny, 0);
+		clrtoeol();
 	}
 }
 
@@ -148,4 +142,19 @@ void MsgBox::print(const char *msgs, ...)
 	vsprintf(msg[t].text, msgs, arg);
 	va_end(arg);
 	msg[t].attr = 0;
+}
+
+
+void MsgBox::add(const char *msgs, ...)
+{
+	if (!ena)
+	{
+		return;
+	}
+	char tmpt[100];
+	va_list arg;
+	va_start(arg, msgs);
+	vsprintf(tmpt, msgs, arg);
+	va_end(arg);
+	strcat(msg[cmsg].text, tmpt);
 }
