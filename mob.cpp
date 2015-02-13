@@ -35,8 +35,7 @@ int CMob::FindMob(int nid)
 {
 	for (int i = 0; i < mobn; i++)
 	{
-		if (i != sbj - 1 && mob[i].id == nid && p + mob[i].p <= GetSrng()
-			&& !IsColls(p, mob[i].p))
+		if (i != sbj - 1 && mob[i].id == nid && p + mob[i].p <= GetSrng() && !IsColls(p, mob[i].p))
 		{
 			return i + 1;
 		}
@@ -83,8 +82,7 @@ void CMob::Atk(int obj, int dt)
 				mob[i].AIFb(2, sbj);
 			}
 		}
-		if (mob[tgt - 1].Adjhlth
-			(AtkCnt(tma, mob[tgt - 1].GetDef(), tcc), 1, id))
+		if (mob[tgt - 1].Adjhlth(AtkCnt(tma, mob[tgt - 1].GetDef(), tcc), 1, id))
 		{
 			int oid = mob[tgt - 1].id, num = mob[tgt - 1].sbj;
 			pos np = mob[tgt - 1].p;
@@ -181,8 +179,7 @@ int CMob::SlctTgt()
 		{
 		case -1:
 			if (player.health > 0
-				&& player.p + p <= GetSrng() + player.GetAtt()
-				&& !IsColls(p, player.p))
+				&& player.p + p <= GetSrng() + player.GetAtt() && !IsColls(p, player.p))
 			{
 				tgt = player.IsEquipped(31) ? 0 : -1;
 			}
@@ -196,8 +193,7 @@ int CMob::SlctTgt()
 			for (int i = 0; i < mobn; i++)
 			{
 				if (i != sbj - 1 && id == mob[i].id
-					&& p + mob[i].p <= mob[i].GetSrng()
-					&& !IsColls(p, mob[i].p))
+					&& p + mob[i].p <= mob[i].GetSrng() && !IsColls(p, mob[i].p))
 				{
 					mob[i].AIFb(2, tgt);
 				}
@@ -312,8 +308,7 @@ void CMob::AIFb(int msg, int tag)
 			for (int i = 0; i < mobn; i++)
 			{
 				if (i != sbj - 1 && id == mob[i].id && mob[i].tgt != tgt
-					&& p + mob[i].p <= mob[i].GetSrng()
-					&& !IsColls(p, mob[i].p))
+					&& p + mob[i].p <= mob[i].GetSrng() && !IsColls(p, mob[i].p))
 				{
 					mob[i].AIFb(2, tgt);
 				}
@@ -530,7 +525,7 @@ void CMob::Spawn(int tid, int num, pos sp)
 	ste = GetMobInitSte(id);
 	lst = 3;
 	tolspn += GetSize();
-	//msg.print("A %s has spawned", name());
+	// msg.print("A %s has spawned", name());
 }
 
 int CMob::Speak(int sit)
@@ -607,8 +602,7 @@ int CMob::Speak(int sit)
 				case 1:
 					if (tm.IsNt())
 					{
-						msg.print
-							("Stay in my hut through the night if you like.");
+						msg.print("Stay in my hut through the night if you like.");
 					}
 					else
 					{
@@ -769,8 +763,7 @@ int CMob::Speak(int sit)
 				msg.print("Some of us have gone hunting and never return.");
 				break;
 			case 2:
-				msg.print
-					("Those Cavemen, have a kind of precious gem which was robbed from us.");
+				msg.print("Those Cavemen, have a kind of precious gem which was robbed from us.");
 				break;
 			}
 			break;
@@ -779,12 +772,15 @@ int CMob::Speak(int sit)
 	case 15:
 	case 16:
 	case 17:
-		for (int i = 0; i < randr(8, 16); i++)
 		{
-			putchar(randr(64, 122));
+			char tmp[16];
+			for (int i = 0; i < randr(8, 16); i++)
+			{
+				tmp[i] = randr(64, 122);
+			}
+			msg.add(tmp);
+			break;
 		}
-		putchar('\n');
-		break;
 	case 20:
 		switch (sit)
 		{
@@ -813,8 +809,7 @@ int CMob::Speak(int sit)
 					msg.print("Welcone to our...village?");
 					break;
 				case 2:
-					msg.print
-						("I used to be a shepherd, but I grow corn for a living now.");
+					msg.print("I used to be a shepherd, but I grow corn for a living now.");
 					break;
 				}
 				return 0;
@@ -888,8 +883,7 @@ int CMob::Speak(int sit)
 				msg.print("I can teach you to craft your bow into crossbow.");
 				break;
 			case 1:
-				msg.print
-					("Go meet the blacksmith if you'd like to get armored.");
+				msg.print("Go meet the blacksmith if you'd like to get armored.");
 				break;
 			case 2:
 				msg.print("I have run out of wood, I wonder if you have some.");
@@ -943,8 +937,7 @@ void MobSpawn()
 			int tx = randr(player.p.x - tl, player.p.x + tl);
 			int ty = randr(player.p.y - tl, player.p.y + tl);
 			sp = ctop(tx, ty);
-			if (tx >= 0 && tx < wlth && ty >= 0 && ty < wlth
-				&& sp + player.p > plsrng)
+			if (tx >= 0 && tx < wlth && ty >= 0 && ty < wlth && sp + player.p > plsrng)
 			{
 				if (!BlcSlctm(blk[sp.geti()], 0))
 				{
@@ -953,23 +946,20 @@ void MobSpawn()
 			}
 			if (++st >= 100)
 			{
-				fprintf(stderr, "crashed blk %d %d %d\n", tx, ty,
-						blk[blki(tx, ty)]);
+				fprintf(stderr, "crashed blk %d %d %d\n", tx, ty, blk[blki(tx, ty)]);
 				return;
 			}
 		}
 		if (cap > 1 && Prob(100))
 		{
-			//msg.print("group");
-			int trys = 0, tid = 0, cid = blk[sp.geti()], num =
-				min(cap, randr(2, 3));
+			// msg.print("group");
+			int trys = 0, tid = 0, cid = blk[sp.geti()], num = min(cap, randr(2, 3));
 			do
 			{
 				tid = SlctMob();
 				if (++trys >= 100)
 				{
-					fprintf(stderr, "crashed mob group id %d %d %d\n", sp.x,
-							sp.y, blk[sp.geti()]);
+					fprintf(stderr, "crashed mob group id %d %d %d\n", sp.x, sp.y, blk[sp.geti()]);
 					return;
 				}
 			}
@@ -981,16 +971,14 @@ void MobSpawn()
 				cp.x += (-1 + 2 * (rand() % 2)) * randr(1, 2);
 				cp.y += (-1 + 2 * (rand() % 2)) * randr(1, 2);
 				int bid = blk[cp.geti()];
-				if (!BlcSlctm(bid, tid) && SpawnChk(tid, bid)
-					&& cp + player.p > plsrng)
+				if (!BlcSlctm(bid, tid) && SpawnChk(tid, bid) && cp + player.p > plsrng)
 				{
 					SpawnMob(tid, cp);
 					num--;
 				}
 				else if (++trys >= 100)
 				{
-					fprintf(stderr, "crashed mob group %d %d %d\n", cp.x, cp.y,
-							blk[cp.geti()]);
+					fprintf(stderr, "crashed mob group %d %d %d\n", cp.x, cp.y, blk[cp.geti()]);
 					num--;
 				}
 			}
@@ -1009,8 +997,7 @@ void MobSpawn()
 			}
 			if (++st >= 100)
 			{
-				fprintf(stderr, "crashed mob %d %d %d\n", sp.x, sp.y,
-						blk[sp.geti()]);
+				fprintf(stderr, "crashed mob %d %d %d\n", sp.x, sp.y, blk[sp.geti()]);
 				return;
 			}
 		}
