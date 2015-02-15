@@ -12,8 +12,8 @@
 #define maxi 10
 #define pnum 8
 #define maxs 20
-#define mxmsg 5
+#define mxmsg 3
 #define eran 7
-#define msgh 5
+#define msgh mxmsg+3
 #define comh 5
 #endif
