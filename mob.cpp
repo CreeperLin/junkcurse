@@ -543,18 +543,18 @@ int CMob::Speak(int sit)
 			switch (rand() % 3)
 			{
 			case 0:
-				msg.print(":-D");
+				msg.add(":-D");
 				break;
 			case 1:
-				msg.print(":-)");
+				msg.add(":-)");
 				break;
 			case 2:
-				msg.print(":-O");
+				msg.add(":-O");
 				break;
 			}
 			break;
 		case 4:
-			msg.print(">_<");
+			msg.add(">_<");
 		}
 		break;
 	case 14:
@@ -563,7 +563,7 @@ int CMob::Speak(int sit)
 		case 0:
 			if (player.IsGrab(21))
 			{
-				msg.print("Your bow looks familar...");
+				msg.add("Your bow looks familar...");
 				return 1;
 			}
 			if (tgt == -1)
@@ -571,10 +571,10 @@ int CMob::Speak(int sit)
 				switch (rand() % 2)
 				{
 				case 0:
-					msg.print("I'm gonna shoot your head.");
+					msg.add("I'm gonna shoot your head.");
 					break;
 				case 1:
-					msg.print("How dare you!");
+					msg.add("How dare you!");
 					break;
 				}
 				return 0;
@@ -584,10 +584,10 @@ int CMob::Speak(int sit)
 				switch (rand() % 2)
 				{
 				case 0:
-					msg.print("Shh...");
+					msg.add("Shh...");
 					break;
 				case 1:
-					msg.print("That's dinner!");
+					msg.add("That's dinner!");
 					break;
 				}
 				return 0;
@@ -597,16 +597,16 @@ int CMob::Speak(int sit)
 				switch (rand() % 2)
 				{
 				case 0:
-					msg.print("Hey! Stop messing around in my forest!");
+					msg.add("Hey! Stop messing around in my forest!");
 					break;
 				case 1:
 					if (tm.IsNt())
 					{
-						msg.print("Stay in my hut through the night if you like.");
+						msg.add("Stay in my hut through the night if you like.");
 					}
 					else
 					{
-						msg.print("Better go hunting before dark.");
+						msg.add("Better go hunting before dark.");
 					}
 					break;
 				}
@@ -617,10 +617,10 @@ int CMob::Speak(int sit)
 			switch (rand() % 2)
 			{
 			case 0:
-				msg.print("Here's all I've got.");
+				msg.add("Here's all I've got.");
 				break;
 			case 1:
-				msg.print("I can sell you everything I have except this bow.");
+				msg.add("I can sell you everything I have except this bow.");
 				break;
 			}
 			break;
@@ -628,10 +628,10 @@ int CMob::Speak(int sit)
 			switch (rand() % 2)
 			{
 			case 0:
-				msg.print("Try not to lose your life in the forest.");
+				msg.add("Try not to lose your life in the forest.");
 				break;
 			case 1:
-				msg.print("There's a mystery in the jungle.");
+				msg.add("There's a mystery in the jungle.");
 				break;
 			}
 			break;
@@ -646,10 +646,10 @@ int CMob::Speak(int sit)
 				switch (rand() % 2)
 				{
 				case 0:
-					msg.print("You'll be punished.");
+					msg.add("You'll be punished.");
 					break;
 				case 1:
-					msg.print("You don't know what pain really is,do you?");
+					msg.add("You don't know what pain really is,do you?");
 					break;
 				}
 				return 0;
@@ -659,10 +659,10 @@ int CMob::Speak(int sit)
 				switch (rand() % 2)
 				{
 				case 0:
-					msg.print("Step away!");
+					msg.add("Step away!");
 					break;
 				case 1:
-					msg.print("You don't wanna get hurt,do you?");
+					msg.add("You don't wanna get hurt,do you?");
 					break;
 				}
 				return 1;
@@ -672,13 +672,13 @@ int CMob::Speak(int sit)
 				switch (rand() % 3)
 				{
 				case 0:
-					msg.print("You don't belong here,Stranger.");
+					msg.add("You don't belong here,Stranger.");
 					break;
 				case 1:
-					msg.print("Aren't you afraid of the dark?");
+					msg.add("Aren't you afraid of the dark?");
 					break;
 				case 2:
-					msg.print("How did you find me?");
+					msg.add("How did you find me?");
 					break;
 				}
 				return 1;
@@ -688,10 +688,10 @@ int CMob::Speak(int sit)
 			switch (rand() % 2)
 			{
 			case 0:
-				msg.print("I made these myself.");
+				msg.add("I made these myself.");
 				break;
 			case 1:
-				msg.print("Wanna try the spine?");
+				msg.add("Wanna try the spine?");
 				break;
 			}
 			break;
@@ -699,10 +699,10 @@ int CMob::Speak(int sit)
 			switch (rand() % 2)
 			{
 			case 0:
-				msg.print("You look just like those living in caves.");
+				msg.add("You look just like those living in caves.");
 				break;
 			case 1:
-				msg.print("Nothing can ever destroy the jungle.");
+				msg.add("Nothing can ever destroy the jungle.");
 				break;
 			}
 			break;
@@ -717,10 +717,10 @@ int CMob::Speak(int sit)
 				switch (rand() % 2)
 				{
 				case 0:
-					msg.print("You should burn.");
+					msg.add("You should burn.");
 					break;
 				case 1:
-					msg.print("Why harm us?");
+					msg.add("Why harm us?");
 					break;
 				}
 				return 0;
@@ -730,13 +730,13 @@ int CMob::Speak(int sit)
 				switch (rand() % 3)
 				{
 				case 0:
-					msg.print("We're shepherds, living on the plain.");
+					msg.add("We're shepherds, living on the plain.");
 					break;
 				case 1:
-					msg.print("Welcome to our shed for a rest.");
+					msg.add("Welcome to our shed for a rest.");
 					break;
 				case 2:
-					msg.print("You look exhausted,have a gulp of our milk!");
+					msg.add("You look exhausted,have a gulp of our milk!");
 					break;
 				}
 				return 1;
@@ -746,10 +746,10 @@ int CMob::Speak(int sit)
 			switch (rand() % 2)
 			{
 			case 0:
-				msg.print("We have wool, but we don't know how to sew.");
+				msg.add("We have wool, but we don't know how to sew.");
 				break;
 			case 1:
-				msg.print("Try these cheese!");
+				msg.add("Try these cheese!");
 				break;
 			}
 			break;
@@ -757,13 +757,13 @@ int CMob::Speak(int sit)
 			switch (rand() % 3)
 			{
 			case 0:
-				msg.print("Hope you enjoy our milk.");
+				msg.add("Hope you enjoy our milk.");
 				break;
 			case 1:
-				msg.print("Some of us have gone hunting and never return.");
+				msg.add("Some of us have gone hunting and never return.");
 				break;
 			case 2:
-				msg.print("Those Cavemen, have a kind of precious gem which was robbed from us.");
+				msg.add("Those Cavemen, have a kind of precious gem which was robbed from us.");
 				break;
 			}
 			break;
@@ -790,10 +790,10 @@ int CMob::Speak(int sit)
 				switch (rand() % 2)
 				{
 				case 0:
-					msg.print("Ouch! What's wrong with you.");
+					msg.add("Ouch! What's wrong with you.");
 					break;
 				case 1:
-					msg.print("Ahh... Stay away from me!");
+					msg.add("Ahh... Stay away from me!");
 					break;
 				}
 				return 0;
@@ -803,13 +803,13 @@ int CMob::Speak(int sit)
 				switch (rand() % 3)
 				{
 				case 0:
-					msg.print("We live together, for safety.");
+					msg.add("We live together, for safety.");
 					break;
 				case 1:
-					msg.print("Welcone to our...village?");
+					msg.add("Welcone to our...village?");
 					break;
 				case 2:
-					msg.print("I used to be a shepherd, but I grow corn for a living now.");
+					msg.add("I used to be a shepherd, but I grow corn for a living now.");
 					break;
 				}
 				return 0;
@@ -819,13 +819,13 @@ int CMob::Speak(int sit)
 			switch (rand() % 3)
 			{
 			case 0:
-				msg.print("Some guys here make nice weapons.");
+				msg.add("Some guys here make nice weapons.");
 				break;
 			case 1:
-				msg.print("Some guys here are good at crafting.");
+				msg.add("Some guys here are good at crafting.");
 				break;
 			case 2:
-				msg.print("You can host in my house for as long as I'm alive.");
+				msg.add("You can host in my house for as long as I'm alive.");
 				break;
 			}
 			break;
@@ -840,10 +840,10 @@ int CMob::Speak(int sit)
 				switch (rand() % 2)
 				{
 				case 0:
-					msg.print("Hey!");
+					msg.add("Hey!");
 					break;
 				case 1:
-					msg.print("Stop it!");
+					msg.add("Stop it!");
 					break;
 				}
 				return 0;
@@ -853,13 +853,13 @@ int CMob::Speak(int sit)
 				switch (rand() % 3)
 				{
 				case 0:
-					msg.print("My dad taught me crafting, and I love it.");
+					msg.add("My dad taught me crafting, and I love it.");
 					break;
 				case 1:
-					msg.print("I'm a Craftsman, selling hand-made stuff.");
+					msg.add("I'm a Craftsman, selling hand-made stuff.");
 					break;
 				case 2:
-					msg.print("Are you looking for some handy stuff?");
+					msg.add("Are you looking for some handy stuff?");
 					break;
 				}
 				return 1;
@@ -869,10 +869,10 @@ int CMob::Speak(int sit)
 			switch (rand() % 2)
 			{
 			case 0:
-				msg.print("These are all made out of wood.");
+				msg.add("These are all made out of wood.");
 				break;
 			case 1:
-				msg.print("Buy this Crossbow if you want to be a Ranger.");
+				msg.add("Buy this Crossbow if you want to be a Ranger.");
 				break;
 			}
 			break;
@@ -880,20 +880,20 @@ int CMob::Speak(int sit)
 			switch (rand() % 3)
 			{
 			case 0:
-				msg.print("I can teach you to craft your bow into crossbow.");
+				msg.add("I can teach you to craft your bow into crossbow.");
 				break;
 			case 1:
-				msg.print("Go meet the blacksmith if you'd like to get armored.");
+				msg.add("Go meet the blacksmith if you'd like to get armored.");
 				break;
 			case 2:
-				msg.print("I have run out of wood, I wonder if you have some.");
+				msg.add("I have run out of wood, I wonder if you have some.");
 				break;
 			}
 			break;
 		}
 		break;
 	default:
-		msg.print("...");
+		msg.add("...");
 		return 0;
 	}
 	return 0;
