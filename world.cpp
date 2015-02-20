@@ -3,6 +3,7 @@ using namespace std;
 void CWorld::EraUpdate()
 {
 	msg.print("Era %d has come.",++era);
+	msg.SetAttr(12);
 	switch (era)
 	{
 		case 0:
@@ -240,6 +241,7 @@ int CWorld::EventUpdate()
 				msg.print("The sky stopped roaring.");
 				break;
 			}
+			msg.SetAttr(12);
 		}
 	}
 	return 0;
@@ -302,6 +304,7 @@ void CWorld::AddEvent(int nid, int nintv)
 				msg.print("The sky began to roar.");
 				break;
 			}
+			msg.SetAttr(12);
 			return;
 		}
 	}
@@ -383,6 +386,7 @@ void CWorld::EventProducer()
 				msg.print("Time to harvest.");
 				break;
 			}
+			msg.SetAttr(12);
 			nievt = 0;
 		}
 	}
