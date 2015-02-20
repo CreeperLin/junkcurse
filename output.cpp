@@ -877,13 +877,13 @@ void prtsinv(int n)
 void prtinv()
 {
 	printw("Inventory\nLeft hand");
-	mvprintw(1, scr_w - 10, "Right hand");
+	mvprintw(cy(), scr_w - 10, "Right hand");
 	prtsinv(0);
-	move(2, 0.6 * scr_w);
+	move(cy(), 0.6 * scr_w);
 	prtsinv(1);
-	mvprintw(3, 0, "Wearings");
-	mvprintw(3, scr_w - 11, "Accessories");
-	move(4, 0);
+	mvprintw(cy() + 1, 0, "Wearings");
+	mvprintw(cy(), scr_w - 11, "Accessories");
+	move(cy() + 1, 0);
 	for (int i = 2; i < 6; i++)
 	{
 		switch (i)
