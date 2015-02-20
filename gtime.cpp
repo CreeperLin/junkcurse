@@ -35,6 +35,7 @@ void gtime::Exchg()
 		if (h >= 6 && h < 18)
 		{
 			msg.print("The morning sun has vanquished the horrible night.");
+			msg.SetAttr(12);
 		}
 	}
 	else
@@ -42,6 +43,7 @@ void gtime::Exchg()
 		if (h < 6 || h >= 18)
 		{
 			msg.print("What a horrible night to have a curse.");
+			msg.SetAttr(12);
 			nt = 1;
 		}
 	}
@@ -63,6 +65,7 @@ void gtime::Exchg()
 			msg.print("The Winter has come.");
 			break;
 		}
+		msg.SetAttr(12);
 	}
 }
 
