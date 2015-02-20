@@ -772,6 +772,7 @@ void CPlayer::AddExp(int aexp)
 		exp -= tlmt;
 		lvl++;
 		msg.print("Level up!");
+		msg.SetAttr(11);
 		maxhlth = 100 + 10 * lvl;
 		health = maxhlth;
 		mxmp = 20 + 10 * lvl;
