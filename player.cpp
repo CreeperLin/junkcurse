@@ -1071,4 +1071,5 @@ void SetPlpos()
 		}
 	}
 	msg.print("You woke up in the %s.", GetBlkNm(tmp));
+	msg.SetAttr(13);
 }
