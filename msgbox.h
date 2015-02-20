@@ -5,7 +5,7 @@ class Msg
 {
 	public:
 	char text[100];
-	unsigned long int attr;
+	int attrn;
 	void Reset();
 	void print();
 };
@@ -28,5 +28,6 @@ class MsgBox
 	void Scroll(int n);
 	void print(const char *msgs, ... );
 	void add(const char *msgs, ... );
+	void SetAttr(int n);
 };
 #endif
