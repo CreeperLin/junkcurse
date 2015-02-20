@@ -7,6 +7,7 @@ int GameStart()
 {
 	GReset();
 	prtmain();
+	msg.ena=1;
 	int ipt1 = InputNum(2);
 	if (ipt1 == 0)
 	{
