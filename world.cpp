@@ -202,6 +202,8 @@ int CWorld::EventUpdate()
 		int tid = wtimer[i].id;
 		switch (tid)
 		{
+		case 0:
+			continue;
 		case 5:
 			pos lp;
 			lp.Set(randr(0, wlth - 1), randr(0, wlth - 1));
@@ -240,8 +242,11 @@ int CWorld::EventUpdate()
 			case 5:
 				msg.print("The sky stopped roaring.");
 				break;
+			default:
+				msg.print("blah blah stopped.");
+				break;
 			}
-			msg.SetAttr(12);
+			msg.SetAttr(13);
 		}
 	}
 	return 0;
