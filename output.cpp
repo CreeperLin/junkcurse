@@ -883,7 +883,6 @@ void prtinv()
 	prtsinv(1);
 	mvprintw(cy() + 1, 0, "Wearings");
 	mvprintw(cy(), scr_w - 11, "Accessories");
-	move(cy() + 1, 0);
 	for (int i = 2; i < 6; i++)
 	{
 		switch (i)
