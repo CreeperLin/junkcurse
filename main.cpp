@@ -22,7 +22,6 @@ int main()
 			}
 		}
 		msg.Init(ctop(0,scr_h-msgh),ctop(scr_w-1,scr_h-1));
-		msg.ena=0;
 		while (1)
 		{
 			if (!KeyEvent())
