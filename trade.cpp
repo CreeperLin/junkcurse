@@ -126,10 +126,10 @@ void prtrd(int mid)
 	SetSell(mid);
 	int curr = GetCurr(mid), mny = player.GetInvAmt(curr);
 	const char *cn = GetCurrNm(curr);
-	CmdInit();
-	printw("money:%d %s\n", mny, cn);
 	while (1)
 	{
+		CmdInit();
+		printw("money:%d %s\n", mny, cn);
 		for (int i = 0; i < cnum; i++)
 		{
 			printw("%d.%s %d%s\n", i + 1, GetItemNm(Sid[i]),
