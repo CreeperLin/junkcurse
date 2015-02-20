@@ -89,6 +89,7 @@ void prtsell(int mid)
 		clear();
 		printw("money:%d %s\n",player.GetInvAmt(curr),cn);
 		prtinv();
+		CmdInit();
 		printw("Enter number to select,0 to exit.\n");
 		refresh();
 		int sn = InputNum(30);
@@ -107,6 +108,7 @@ void prtsell(int mid)
 		{
 			tp = 0.2 * GetBPrice(sid,curr);
 		}
+		CmdInit();
 		printw("Price:%d %s\nInput amount to be sold.(total %d)\n", tp,cn, ta);
 		refresh();
 		int samt = InputNum(ta);
@@ -128,6 +130,7 @@ void prtrd(int mid)
 	const char *cn = GetCurrNm(curr);
 	while (1)
 	{
+		msg.Show();
 		CmdInit();
 		printw("money:%d %s\n", mny, cn);
 		for (int i = 0; i < cnum; i++)
