@@ -426,9 +426,9 @@ int GetPara()
 void CmdInit()
 {
 	int sy = scr_h - msgh - comh;
-	for (int cy = sy; cy < scr_h - msgh; cy++)
+	for (int ny = sy; ny < scr_h - msgh; ny++)
 	{
-		move(cy, 0);
+		move(ny, 0);
 		clrtoeol();
 	}
 	move(sy, 0);
@@ -497,12 +497,6 @@ void Explode(pos cp, int eid)
 	int rng = GetExRng(eid);
 	int dmg = GetExDmg(eid);
 	msg.print("A %s exploded", GetItemNm(eid));
-	if (player.health)
-	{
-		int atk = SplashDmg(cp, player.p, rng, dmg);
-		// msg.print("%d", atk);
-		player.Adjhlth(AtkCnt(atk, player.GetDef(), 0), 3, eid);
-	}
 	for (int i = 0; i < mobn; i++)
 	{
 		if (mob[i].id)
@@ -522,6 +516,12 @@ void Explode(pos cp, int eid)
 				}
 			}
 		}
+	}
+	if (player.health)
+	{
+		int atk = SplashDmg(cp, player.p, rng, dmg);
+		// msg.print("%d", atk);
+		player.Adjhlth(AtkCnt(atk, player.GetDef(), 0), 3, eid);
 	}
 }
 
