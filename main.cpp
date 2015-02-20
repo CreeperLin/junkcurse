@@ -49,6 +49,7 @@ int main()
 				prthud();
 				msg.print("You woke up in the %s.",
 					   GetBlkNm(blk[player.p.geti()]));
+				msg.SetAttr(13);
 				SetSpnEnv();
 			}
 			prthud();
