@@ -255,6 +255,10 @@ void prtdmsg(int sbj, int evt, int obj)
 		}
 		break;
 	}
+	if (sbj == -1)
+	{
+		msg.SetAttr(10);
+	}
 }
 
 void prtbar(int val, int max)
