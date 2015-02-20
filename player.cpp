@@ -174,6 +174,7 @@ void CPlayer::Talk()
 	case 0:
 		break;
 	case 1:
+		msg.Show();
 		CmdInit();
 	printw("You:\n1.Buy\n2.Sell\n0.Leave\n");
 		refresh();
@@ -185,11 +186,13 @@ void CPlayer::Talk()
 			break;
 		case 1:
 			mob[tnum].Speak(1);
+			msg.Show();
 			prtrd(mob[tnum].id);
 			mob[tnum].Speak(2);
 			break;
 		case 2:
 			prtsell(mob[tnum].id);
+			mob[tnum].Speak(2);
 			break;
 		}
 		break;
