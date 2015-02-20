@@ -3,14 +3,14 @@ using namespace std;
 void Msg::Reset()
 {
 	sprintf(text, "");
-	attr = 0;
+	attrn = 0;
 }
 
 void Msg::print()
 {
-	attron(attr);
+	attron(attr[attrn]);
 	printw(text);
-	attroff(attr);
+	attroff(attr[attrn]);
 }
 
 void MsgBox::Reset()
@@ -141,7 +141,7 @@ void MsgBox::print(const char *msgs, ...)
 	va_start(arg, msgs);
 	vsprintf(msg[t].text, msgs, arg);
 	va_end(arg);
-	msg[t].attr = 0;
+	msg[t].attrn = 0;
 }
 
 
@@ -156,5 +156,10 @@ void MsgBox::add(const char *msgs, ...)
 	va_start(arg, msgs);
 	vsprintf(tmpt, msgs, arg);
 	va_end(arg);
-	strcat(msg[cmsg-1].text, tmpt);
+	strcat(msg[cmsg - 1].text, tmpt);
+}
+
+void MsgBox::SetAttr(int n)
+{
+	msg[cmsg - 1].attrn = n;
 }
