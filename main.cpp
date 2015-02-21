@@ -6,7 +6,7 @@ int main()
 	noecho();
 	start_color();
 	initattr();
-	getmaxyx(stdscr,scr_h,scr_w);
+	getmaxyx(stdscr, scr_h, scr_w);
 	MkGdir();
 	while (1)
 	{
@@ -32,9 +32,9 @@ int main()
 					break;
 				}
 			}
+			prthud();
 			if (player.health <= 0)
 			{
-				prthud();
 				delay(2);
 				prtpldth();
 				int trspn = InputNum(1);
@@ -47,12 +47,9 @@ int main()
 				}
 				clear();
 				prthud();
-				msg.print("You woke up in the %s.",
-					   GetBlkNm(blk[player.p.geti()]));
-				msg.SetAttr(13);
+				msg.print(13, "You woke up in the %s.", GetBlkNm(blk[player.p.geti()]));
 				SetSpnEnv();
 			}
-			prthud();
 		}
 	}
 	endwin();
@@ -70,7 +67,7 @@ void Refresh()
 		{
 			if (player.p + mob[i].p > 100)
 			{
-				//msg.print("A %s has been wiped out", mob[i].name());
+				// msg.print("A %s has been wiped out", mob[i].name());
 				mob[i].Reset();
 			}
 		}
