@@ -38,7 +38,7 @@ int Command()
 	char input[1024], *tpc;
 	mvprintw(scr_h - msgh - 1, 0, ">");
 	echo();
-	scanw("%s", input);
+	getstr(input);
 	noecho();
 	tpc = strtok(input, " ");
 	if (!tpc)
