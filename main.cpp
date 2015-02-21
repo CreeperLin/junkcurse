@@ -35,7 +35,7 @@ int main()
 			prthud();
 			if (player.health <= 0)
 			{
-				delay(2);
+				sleep(2);
 				prtpldth();
 				int trspn = InputNum(1);
 				player.Respawn();
