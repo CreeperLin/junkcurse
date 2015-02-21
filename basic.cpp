@@ -119,11 +119,13 @@ int Command()
 	}
 	else if (!strcmp(tpc, "map"))
 	{
-		prtfmp(15);
+		prtfmp(scr_w / 4 - 1);
+		getch();
 	}
 	else if (!strcmp(tpc, "hmap"))
 	{
 		prthmp();
+		getch();
 	}
 	else if (!strcmp(tpc, "nuke"))
 	{
@@ -189,6 +191,7 @@ int Command()
 	else if (!strcmp(tpc, "wstat"))
 	{
 		prtwst();
+		getch();
 	}
 	else if (!strcmp(tpc, "aid"))
 	{
@@ -295,27 +298,28 @@ int Command()
 			}
 		}
 		refresh();
+		getch();
 	}
 	else if (!strcmp(tpc, "listthing"))
 	{
-		clear();
 		for (int i = 0; i < itmid; i++)
 		{
-			printw("%d %s\n", i, GetItemNm(i));
+			clear();
+			printwr("%d %s\n", i, GetItemNm(i));
+			getch();
 		}
-		refresh();
 	}
 	else if (!strcmp(tpc, "listmob"))
 	{
-		clear();
 		for (int i = 1; i <= mobid; i++)
 		{
-			printw
+			clear();
+			printwr
 				("%s id:%d\nHealth:%d\nAtk(m/r):%d/%d Def:%d\nRng:%d Srng:%d Spd:%d\n\n",
 				 GetMobNm(i), i, GetMobMhlth(i), GetMobMatk(i),
 				 GetMobRatk(i), GetMobDef(i), GetMobRng(i), GetMobSrng(i), GetMobSpd(i));
+			getch();
 		}
-		refresh();
 	}
 	else if (!strcmp(tpc, "mstat"))
 	{
@@ -328,6 +332,8 @@ int Command()
 				prtmst(i);
 			}
 		}
+		refresh();
+		getch();
 	}
 	else if (!strcmp(tpc, "buff"))
 	{
@@ -362,6 +368,7 @@ int Command()
 	}
 	else if (!strcmp(tpc, "demo"))
 	{
+		int width = scr_w / 4 - 1;
 		player.p.x = 0;
 		player.p.y = 0;
 		while (player.p.x < wlth)
@@ -369,7 +376,7 @@ int Command()
 			clear();
 			player.p.x += 1;
 			player.p.y += 1;
-			prtfmp(15);
+			prtfmp(width);
 			delay(0.05);
 		}
 		player.p.x = 0;
@@ -379,7 +386,7 @@ int Command()
 			clear();
 			player.p.x += 1;
 			player.p.y -= 1;
-			prtfmp(15);
+			prtfmp(width);
 			delay(0.05);
 		}
 		player.p = player.spn;
