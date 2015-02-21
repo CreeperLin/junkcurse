@@ -8,6 +8,7 @@ int GameStart()
 	GReset();
 	prtmain();
 	msg.Init(ctop(0, scr_h - msgh), ctop(scr_w - 1, scr_h - 1));
+	CmdInit();
 	int ipt1 = InputNum(2);
 	if (ipt1 == 0)
 	{
@@ -565,10 +566,12 @@ int SavW()
 	{
 		msg.print("Failed to open.");
 		msg.Show();
+		refresh();
 		return 0;
 	}
 	msg.print("Saving %s...", world.name);
 	msg.Show();
+	refresh();
 	fwrite(&world, sizeof(world), 1, wsav);
 	fwrite(&tm, sizeof(tm), 1, wsav);
 	for (int i = 0; i < inum; i++)
@@ -587,10 +590,12 @@ int SavW()
 	{
 		msg.print("Failed to close.");
 		msg.Show();
+		refresh();
 		return 0;
 	}
 	msg.print("%s saved successfully.", world.name);
 	msg.Show();
+	refresh();
 	return 1;
 }
 
@@ -605,19 +610,23 @@ int SavP()
 	{
 		msg.print("Failed to open.");
 		msg.Show();
+		refresh();
 		return 0;
 	}
 	msg.print("Saving %s...", player.name);
 	msg.Show();
+	refresh();
 	fwrite(&player, sizeof(player), 1, psav);
 	if (fclose(psav))
 	{
 		msg.print("Failed to close.");
 		msg.Show();
+		refresh();
 		return 0;
 	}
 	msg.print("%s saved successfully.", player.name);
 	msg.Show();
+	refresh();
 	return 1;
 }
 
@@ -628,10 +637,12 @@ int LoadW()
 	{
 		msg.print("Failed to open.");
 		msg.Show();
+		refresh();
 		return 0;
 	}
 	msg.print("Loading world");
 	msg.Show();
+	refresh();
 	fread(&world, sizeof(world), 1, wld);
 	fread(&tm, sizeof(tm), 1, wld);
 	for (int i = 0; i < inum; i++)
@@ -651,10 +662,12 @@ int LoadW()
 	{
 		msg.print("Failed to close.");
 		msg.Show();
+		refresh();
 		return 0;
 	}
 	msg.print("%s loaded successfully.", world.name);
 	msg.Show();
+	refresh();
 	return 1;
 }
 
@@ -665,20 +678,24 @@ int LoadP()
 	{
 		msg.print("Failed to open.");
 		msg.Show();
+		refresh();
 		return 0;
 	}
 	msg.print("Loading player");
 	msg.Show();
+	refresh();
 	fread(&player, sizeof(player), 1, pld);
 	if (fclose(pld))
 	{
 		msg.print("Failed to close.");
 		msg.Show();
+		refresh();
 		return 0;
 	}
 	player.p = player.spn;
 	msg.print("%s loaded successfully.", player.name);
 	msg.Show();
+	refresh();
 	return 1;
 }
 
