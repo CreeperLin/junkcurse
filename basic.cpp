@@ -7,7 +7,7 @@ int GameStart()
 {
 	GReset();
 	prtmain();
-	msg.ena=1;
+	msg.Init(ctop(0, scr_h - msgh), ctop(scr_w - 1, scr_h - 1));
 	int ipt1 = InputNum(2);
 	if (ipt1 == 0)
 	{
@@ -564,9 +564,11 @@ int SavW()
 	if ((wsav = fopen(wdir, "wb")) == NULL)
 	{
 		msg.print("Failed to open.");
+		msg.Show();
 		return 0;
 	}
 	msg.print("Saving %s...", world.name);
+	msg.Show();
 	fwrite(&world, sizeof(world), 1, wsav);
 	fwrite(&tm, sizeof(tm), 1, wsav);
 	for (int i = 0; i < inum; i++)
@@ -584,9 +586,11 @@ int SavW()
 	if (fclose(wsav))
 	{
 		msg.print("Failed to close.");
+		msg.Show();
 		return 0;
 	}
 	msg.print("%s saved successfully.", world.name);
+	msg.Show();
 	return 1;
 }
 
@@ -600,16 +604,20 @@ int SavP()
 	if ((psav = fopen(pdir, "wb")) == NULL)
 	{
 		msg.print("Failed to open.");
+		msg.Show();
 		return 0;
 	}
 	msg.print("Saving %s...", player.name);
+	msg.Show();
 	fwrite(&player, sizeof(player), 1, psav);
 	if (fclose(psav))
 	{
 		msg.print("Failed to close.");
+		msg.Show();
 		return 0;
 	}
 	msg.print("%s saved successfully.", player.name);
+	msg.Show();
 	return 1;
 }
 
@@ -619,9 +627,11 @@ int LoadW()
 	if ((wld = fopen("/mnt/sdcard/Game/Worlds/World 1/data", "rb")) == NULL)
 	{
 		msg.print("Failed to open.");
+		msg.Show();
 		return 0;
 	}
 	msg.print("Loading world");
+	msg.Show();
 	fread(&world, sizeof(world), 1, wld);
 	fread(&tm, sizeof(tm), 1, wld);
 	for (int i = 0; i < inum; i++)
@@ -640,9 +650,11 @@ int LoadW()
 	if (fclose(wld))
 	{
 		msg.print("Failed to close.");
+		msg.Show();
 		return 0;
 	}
 	msg.print("%s loaded successfully.", world.name);
+	msg.Show();
 	return 1;
 }
 
@@ -652,17 +664,21 @@ int LoadP()
 	if ((pld = fopen("/mnt/sdcard/Game/Players/Alpha/data", "rb")) == NULL)
 	{
 		msg.print("Failed to open.");
+		msg.Show();
 		return 0;
 	}
 	msg.print("Loading player");
+	msg.Show();
 	fread(&player, sizeof(player), 1, pld);
 	if (fclose(pld))
 	{
 		msg.print("Failed to close.");
+		msg.Show();
 		return 0;
 	}
 	player.p = player.spn;
 	msg.print("%s loaded successfully.", player.name);
+	msg.Show();
 	return 1;
 }
 
