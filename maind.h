@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <time.h>
 #include <math.h>
 #include <string.h>
 #include <ncurses.h>
