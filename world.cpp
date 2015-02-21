@@ -246,7 +246,7 @@ int CWorld::EventUpdate()
 				msg.print("blah blah stopped.");
 				break;
 			}
-			msg.SetAttr(13);
+			msg.SetAttr(12);
 		}
 	}
 	return 0;
