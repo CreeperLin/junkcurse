@@ -952,11 +952,13 @@ void prtwst()
 
 void prtst()
 {
+	clear();
 	printw
 		("Showing %s's stat\npos: x:%ld y:%ld\nhealth:%d/%d\nlevel:%d exp:%d\natk:%d\ndef:%d\nrng:%d\nsrng:%d\n",
 		 player.name, player.p.x, player.p.y, player.health,
 		 player.maxhlth, player.lvl, player.exp, player.GetAtk(0),
 		 player.GetDef(), player.GetRng(), player.GetSrng());
+	refresh();
 }
 
 void prtmst(int n)
