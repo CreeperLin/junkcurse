@@ -95,7 +95,7 @@ void initattr()
 void prtbuff(int bid, int sbj, int obj)
 {
 	const char *sbjn = "You", *objn = "You";
-	if (sbj > 0)
+	if (sbj > 0 && sbj < mobn)
 	{
 		sbjn = GetMobNm(sbj);
 	}
@@ -361,7 +361,7 @@ void prthud()
 		if (bid)
 		{
 			prtile(GetBuffChar(bid), GetBuffCol(bid));
-			move(1, cx() - 4);
+			move(1, scr_w - (i + 2) * 2);
 		}
 	}
 	move(3, scr_w - 20);
