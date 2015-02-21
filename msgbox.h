@@ -3,7 +3,7 @@
 #include "def.h"
 class Msg
 {
-	public:
+  public:
 	char text[100];
 	int attrn;
 	void Reset();
@@ -12,7 +12,7 @@ class Msg
 
 class MsgBox
 {
-	public:
+  public:
 	pos p1;
 	pos p2;
 	int cmsg;
@@ -20,14 +20,15 @@ class MsgBox
 	Msg msg[mxmsg];
 	void Reset();
 	void Wipe();
-	void Init(pos np1,pos np2);
+	void Init(pos np1, pos np2);
 	void DrawBodr();
 	void Show();
 	void Clear();
 	void SetPos(pos np1, pos np2);
 	void Scroll(int n);
-	void print(const char *msgs, ... );
-	void add(const char *msgs, ... );
+	void print(const char *msgs, ...);
+	void print(int attrn, const char *msgs, ...);
+	void add(const char *msgs, ...);
 	void SetAttr(int n);
 };
 #endif
