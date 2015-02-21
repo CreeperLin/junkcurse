@@ -354,7 +354,7 @@ void prthud()
 	move(3, 0);
 	prtbar(player.mp, player.mxmp);
 	mvprintw(0, scr_w - 5, "Buffs");
-	move(1, scr_w - 1);
+	move(1, scr_w - 2);
 	for (int i = 0; i < 10; i++)
 	{
 		int bid = player.buff[i].id;
