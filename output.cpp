@@ -932,6 +932,7 @@ void prtcrash()
 
 void prtwst()
 {
+	clear();
 	double n[17];
 	for (int i = 0; i < 17; i++)
 	{
@@ -943,8 +944,9 @@ void prtwst()
 	}
 	for (int i = 0; i < 17; i++)
 	{
-		msg.print("%s: %.2f", GetBlkNm(i), 100 * n[i] / (wlth * wlth));
+		printw("%s: %.2f", GetBlkNm(i), 100 * n[i] / (wlth * wlth));
 	}
+	refresh();
 }
 
 void prtst()
