@@ -109,7 +109,7 @@ void prtbuff(int bid, int sbj, int obj)
 		objn = GetMobNm(obj);
 	}
 	msg.print("%s inflict %s buff on %s.", objn, GetBuffNm(bid), sbjn);
-	attrset:
+  attrset:
 	if (sbj == -1)
 	{
 		msg.SetAttr(15);
@@ -722,7 +722,8 @@ const char GetItemChar(int id)
 void prthmp()
 {
 	clear();
-	int chs = 65, chc[blkid + 1];
+	int wid = scr_w / 2 - 1;
+	int chs = wlth / wid, chc[blkid + 1];
 	pos cp;
 	for (cp.y = 0; cp.y <= wlth - chs; cp.y += chs)
 	{
@@ -944,7 +945,7 @@ void prtwst()
 	}
 	for (int i = 0; i < 17; i++)
 	{
-		printw("%s: %.2f", GetBlkNm(i), 100 * n[i] / (wlth * wlth));
+		printw("%s: %.2f\n", GetBlkNm(i), 100 * n[i] / (wlth * wlth));
 	}
 	refresh();
 }
