@@ -211,8 +211,8 @@ int Command()
 			unsigned int hlth = atoi(tc);
 			if (hlth)
 			{
-				player.Adjhlth(hlth, 0, 0);
 				msg.print("You've got %d health.", hlth);
+				player.Adjhlth(hlth, 0, 0);
 			}
 		}
 	}
