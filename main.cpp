@@ -45,9 +45,8 @@ int main()
 					SavP();
 					break;
 				}
-				clear();
-				prthud();
 				msg.print(13, "You woke up in the %s.", GetBlkNm(blk[player.p.geti()]));
+				prthud();
 				SetSpnEnv();
 			}
 		}
