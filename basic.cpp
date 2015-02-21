@@ -728,16 +728,3 @@ int max(int n1, int n2)
 {
 	return n1 > n2 ? n1 : n2;
 }
-
-void delay(double n)
-{
-	clock_t t1, t2;
-	t1 = clock();
-	while (1)
-	{
-		if ((double)((t2 = clock()) - t1) / CLOCKS_PER_SEC >= n)
-		{
-			return;
-		}
-	}
-}
