@@ -144,6 +144,27 @@ void MsgBox::print(const char *msgs, ...)
 	msg[t].attrn = 0;
 }
 
+void MsgBox::print(int attrn, const char *msgs, ...);
+{
+	if (!ena)
+	{
+		return;
+	}
+	int t = mxmsg - 1;
+	if (cmsg == mxmsg)
+	{
+		Scroll(1);
+	}
+	else
+	{
+		t = cmsg++;
+	}
+	va_list arg;
+	va_start(arg, msgs);
+	vsprintf(msg[t].text, msgs, arg);
+	va_end(arg);
+	msg[t].attrn = attrn;
+}
 
 void MsgBox::add(const char *msgs, ...)
 {
