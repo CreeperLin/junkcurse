@@ -377,7 +377,7 @@ int Command()
 			player.p.x += 1;
 			player.p.y += 1;
 			prtfmp(width);
-			delay(0.05);
+			usleep(50000);
 		}
 		player.p.x = 0;
 		player.p.y = wlth - 1;
@@ -387,7 +387,7 @@ int Command()
 			player.p.x += 1;
 			player.p.y -= 1;
 			prtfmp(width);
-			delay(0.05);
+			delay(50000);
 		}
 		player.p = player.spn;
 	}
