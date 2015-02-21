@@ -144,7 +144,7 @@ void MsgBox::print(const char *msgs, ...)
 	msg[t].attrn = 0;
 }
 
-void MsgBox::print(int attrn, const char *msgs, ...);
+void MsgBox::print(int nattrn, const char *msgs, ...)
 {
 	if (!ena)
 	{
@@ -163,7 +163,7 @@ void MsgBox::print(int attrn, const char *msgs, ...);
 	va_start(arg, msgs);
 	vsprintf(msg[t].text, msgs, arg);
 	va_end(arg);
-	msg[t].attrn = attrn;
+	msg[t].attrn = nattrn;
 }
 
 void MsgBox::add(const char *msgs, ...)
