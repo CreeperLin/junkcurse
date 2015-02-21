@@ -361,7 +361,7 @@ void prthud()
 		if (bid)
 		{
 			prtile(GetBuffChar(bid), GetBuffCol(bid));
-			move(1, cx() - 2);
+			move(1, cx() - 4);
 		}
 	}
 	move(3, scr_w - 20);
