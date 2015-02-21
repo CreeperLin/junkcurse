@@ -823,7 +823,7 @@ void CPlayer::Sleep()
 		if (hme)
 		{
 			msg.print("You lay down and fell asleep...");
-			delay(2);
+			sleep(2);
 			spn = p;
 			health = maxhlth;
 			mp = mxmp;
