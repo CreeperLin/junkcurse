@@ -102,13 +102,18 @@ void prtbuff(int bid, int sbj, int obj)
 	if (!obj)
 	{
 		msg.print("%s got inflicted with %s buff.", sbjn, GetBuffNm(bid));
-		return;
+		goto attrset;
 	}
 	else if (obj > 0)
 	{
 		objn = GetMobNm(obj);
 	}
 	msg.print("%s inflict %s buff on %s.", objn, GetBuffNm(bid), sbjn);
+	attrset:
+	if (sbj == -1)
+	{
+		msg.SetAttr(15);
+	}
 }
 
 void prtadjm(int n, int sbj, int evt, int obj)
