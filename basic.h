@@ -21,5 +21,4 @@ int LoadP();
 int sign(long int n);
 int min(int n1,int n2);
 int max(int n1,int n2);
-void delay(double n);
 #endif
