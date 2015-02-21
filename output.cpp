@@ -259,6 +259,8 @@ void prtdmsg(int sbj, int evt, int obj)
 			break;
 		}
 		break;
+	default:
+		msg.print("%s just went around and died.", sbjn);
 	}
 	if (sbj == -1)
 	{
