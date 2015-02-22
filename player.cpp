@@ -823,6 +823,8 @@ void CPlayer::Sleep()
 		if (hme)
 		{
 			msg.print("You lay down and fell asleep...");
+			msg.Show();
+			refresh();
 			sleep(2);
 			spn = p;
 			health = maxhlth;
