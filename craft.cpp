@@ -103,6 +103,7 @@ void CrGetIng(int oid)
 int prtcr()
 {
 	int no = 0, num[15], maxa[15];
+	CmdInit();
 	for (int i = 1; i < itmid; i++)
 	{
 		CrReset();
