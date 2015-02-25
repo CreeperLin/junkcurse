@@ -209,6 +209,8 @@ void CPlayer::Inv()
 	prtinv();
 	while (1)
 	{
+		msg.Show();	
+		refresh();	
 		if (getch() == key[9])
 		{
 			return;
@@ -234,6 +236,8 @@ void CPlayer::Inv()
 	int ttp = slot[tmpi].type();
 	while (1)
 	{
+		msg.Show();	
+		refresh();	
 		CmdInit();
 		printw("1.use 2.place 3.equip/dequip\n4.grab 5.throw 6.adapt 7.decraft 0.exit.\n");
 		refresh();
