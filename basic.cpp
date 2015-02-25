@@ -76,6 +76,14 @@ int Command()
 	{
 		KeySet();
 	}
+	else if (!strcmp(tpc, "updscr"))
+	{
+		getmaxyx(stdscr, scr_h, scr_w);
+	}
+	else if (!strcmp(tpc, "clrmsg"))
+	{
+		msg.Clear();
+	}	
 	else if (!strcmp(tpc, "bang"))
 	{
 		Explode(player.p, 44);
@@ -119,6 +127,7 @@ int Command()
 	}
 	else if (!strcmp(tpc, "map"))
 	{
+		clear();
 		prtfmp(scr_w / 4 - 1);
 		getch();
 	}
@@ -187,6 +196,7 @@ int Command()
 	else if (!strcmp(tpc, "stat"))
 	{
 		prtst();
+		getch();	
 	}
 	else if (!strcmp(tpc, "wstat"))
 	{

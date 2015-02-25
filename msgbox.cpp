@@ -18,7 +18,6 @@ void MsgBox::Reset()
 	Clear();
 	p1.Reset();
 	p2.Reset();
-	cmsg = 0;
 	ena = 0;
 }
 
@@ -73,6 +72,7 @@ void MsgBox::Clear()
 	{
 		msg[i].Reset();
 	}
+	cmsg = 0;
 }
 
 void MsgBox::SetPos(pos np1, pos np2)

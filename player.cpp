@@ -51,6 +51,7 @@ void CPlayer::Remove()
 	Refresh();
 }
 
+
 void CPlayer::Kill()
 {
 	int dist = 0, tmpn = 0;
@@ -112,7 +113,7 @@ void CPlayer::Kill()
 				int atype = GetAmmoType(wid);
 				if (GetInvAmt(atype) <= 10)
 				{
-					msg.print("Low ammo");
+					msg.print(15,"Low ammo");
 				}
 				DecInv(atype, 1);
 			}
@@ -616,7 +617,7 @@ int CPlayer::GetAtk(int n)
 			int atype = GetAmmoType(wid);
 			if (!GetInvAmt(atype))
 			{
-				msg.print("Out of ammo.");
+				msg.print(15,"Out of ammo.");
 				return 0;
 			}
 			return ratk + watk + GetItemAdmg(atype);
@@ -626,7 +627,7 @@ int CPlayer::GetAtk(int n)
 		{
 			return watk;
 		}
-		msg.print("Out of mana");
+		msg.print(15,"Out of mana");
 		return 0;
 	}
 	return matk + watk;

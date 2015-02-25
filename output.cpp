@@ -759,20 +759,19 @@ void prthmp()
 
 void prtfmp(int rng)
 {
-	clear();
-	int mf = 0, fi = 0;
-	for (int cy = player.p.y - rng; cy <= player.p.y + rng; cy++)
+	int mf = 0, fi = 0, tmx = cx();
+	for (int ty = player.p.y - rng; ty <= player.p.y + rng; ty++)
 	{
-		for (int cx = player.p.x - rng; cx <= player.p.x + rng; cx++)
+		for (int tx = player.p.x - rng; tx <= player.p.x + rng; tx++)
 		{
-			if (player.p == ctop(cx, cy))
+			if (player.p == ctop(tx, ty))
 			{
 				prtile(GetMobChar(-1), GetMobCol(-1));
 				continue;
 			}
 			for (int i = 0; i < inum; i++)
 			{
-				if (witem[i].id && witem[i].p == ctop(cx, cy) && witem[i].plc)
+				if (witem[i].id && witem[i].p == ctop(tx, ty) && witem[i].plc)
 				{
 					prtile(GetItemChar(witem[i].id), GetItemCol(witem[i].id));
 					fi = 1;
@@ -786,7 +785,7 @@ void prtfmp(int rng)
 			}
 			for (int j = 0; j < mobn; j++)
 			{
-				if (mob[j].id && mob[j].p == ctop(cx, cy))
+				if (mob[j].id && mob[j].p == ctop(tx, ty))
 				{
 					prtile(GetMobChar(mob[j].id), GetMobCol(mob[j].id));
 					mf = 1;
@@ -798,10 +797,10 @@ void prtfmp(int rng)
 				mf = 0;
 				continue;
 			}
-			prtile(GetBlkChar(blk[blki(cx, cy)]), GetBlkCol(blk[blki(cx, cy)]));
+			prtile(GetBlkChar(blk[blki(tx, ty)]), GetBlkCol(blk[blki(tx, ty)]));
 		}
-		printw("\n");
-	}
+		move(cy() + 1, tmx);
+	}	
 	refresh();
 }
 
