@@ -126,10 +126,11 @@ void prtrd(int mid)
 {
 	TrReset();
 	SetSell(mid);
-	int curr = GetCurr(mid), mny = player.GetInvAmt(curr);
+	int curr = GetCurr(mid);
 	const char *cn = GetCurrNm(curr);
 	while (1)
 	{
+		int mny = player.GetInvAmt(curr);
 		msg.Show();
 		CmdInit();
 		printw("money:%d %s\n", mny, cn);
@@ -153,12 +154,17 @@ void prtrd(int mid)
 			msg.print("Can't afford this.");
 			continue;
 		}
-		printw("Enter amount(max %d), or 0 to cancel.\n", maxa);
-		refresh();
-		int namt = InputNum(maxa);
-		if (namt == 0)
+		int namt = 1;
+		if (maxa > 1)
 		{
-			return;
+			CmdInit();
+			printw("You've selected %s.\nEnter amount(max %d), or 0 to cancel.\n",GetItemNm(Sid[tmps]), maxa);
+			refresh();
+			namt = InputNum(maxa);
+			if (namt == 0)
+			{
+				return;
+			}
 		}
 		player.DecInv(curr, prc * namt);
 		player.AddInv(Sid[tmps], namt, 0, 0);
