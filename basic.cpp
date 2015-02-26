@@ -79,6 +79,7 @@ int Command()
 	else if (!strcmp(tpc, "updscr"))
 	{
 		getmaxyx(stdscr, scr_h, scr_w);
+		msg.print("current scr W*H: %d*%d", scr_w, scr_h);
 	}
 	else if (!strcmp(tpc, "clrmsg"))
 	{
@@ -128,12 +129,12 @@ int Command()
 	else if (!strcmp(tpc, "map"))
 	{
 		clear();
-		prtfmp(scr_w / 4 - 1);
+		prtfmp(min(scr_h, scr_w / 2) / 2 - 1);
 		getch();
 	}
 	else if (!strcmp(tpc, "hmap"))
 	{
-		prthmp();
+		prthmp(min(scr_h, scr_w / 2));
 		getch();
 	}
 	else if (!strcmp(tpc, "nuke"))

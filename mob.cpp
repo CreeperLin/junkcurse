@@ -214,10 +214,15 @@ void CMob::Mmove(int dir)
 	{
 		for (int i = 0; i < 7; i++)
 		{
-			dir++;
+			int t = -1 + randr(0, 1) * 2; 
+			dir += t;
 			if (dir > 8)
 			{
 				dir -= 8;
+			}
+			if (dir < 1)
+			{
+				dir += 8;
 			}
 			if (!IsCollm(id, p, dir))
 			{
@@ -244,10 +249,15 @@ void CMob::Mmove(pos op)
 	{
 		for (int i = 0; i < 7; i++)
 		{
-			dir++;
+			int t = -1 + randr(0, 1) * 2; 
+			dir += t;
 			if (dir > 8)
 			{
 				dir -= 8;
+			}
+			if (dir < 1)
+			{
+				dir += 8;
 			}
 			if (!IsCollm(id, p, dir))
 			{

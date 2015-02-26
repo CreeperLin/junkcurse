@@ -18,7 +18,7 @@ void prtpldth();
 void prthud();
 void Obsrv();
 int prtmb(int rng);
-void prthmp();
+void prthmp(int wid);
 void prtfmp(int rng);
 void prtmp(int rng);
 void prtime();

@@ -721,10 +721,9 @@ const char GetItemChar(int id)
 	}
 }
 
-void prthmp()
+void prthmp(int wid)
 {
 	clear();
-	int wid = scr_w / 2 - 1;
 	int chs = wlth / wid, chc[blkid + 1];
 	pos cp;
 	for (cp.y = 0; cp.y <= wlth - chs; cp.y += chs)
