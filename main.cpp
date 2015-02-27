@@ -15,8 +15,10 @@ int main()
 	initattr();
 	getmaxyx(stdscr, scr_h, scr_w);
 	MkGdir();
+	msg.Reset();
 	while (1)
 	{
+		GReset();
 		{
 			int start = GameStart();
 			if (!start)
@@ -92,3 +94,4 @@ void Refresh()
 		}
 	}
 }
+

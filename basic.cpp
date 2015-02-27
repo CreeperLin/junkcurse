@@ -1,14 +1,15 @@
 #include "main.h"
-#define GDIR "/mnt/sdcard/Game"
+#define GDIR "./Game"
 #define PDIR GDIR"/Players"
 #define WDIR GDIR"/Worlds"
 using namespace std;
 int GameStart()
 {
-	GReset();
 	prtmain();
 	msg.Init(ctop(0, scr_h - msgh), ctop(scr_w - 1, scr_h - 1));
 	CmdInit();
+	msg.Show();
+	refresh();
 	int ipt1 = InputNum(2);
 	if (ipt1 == 0)
 	{
@@ -425,7 +426,6 @@ void GReset()
 	}
 	world.Reset();
 	player.Reset();
-	msg.Reset();
 	tm.Reset();
 	KeyReset();
 	CrReset();
@@ -570,13 +570,13 @@ void MkGdir()
 
 void crtdir(const char *dir)
 {
-	mkdir(dir, 0);
+	mkdir(dir, S_IRWXU | S_IRWXG | S_IRWXO);
 }
 
 int SavW()
 {
 	FILE *wsav;
-	char wdir[100] = "/mnt/sdcard/Game/Worlds/World 1";
+	char wdir[100] = "./Game/Worlds/World 1";
 	const char *bnm = "/data";
 	crtdir(wdir);
 	strcat(wdir, bnm);
@@ -620,7 +620,7 @@ int SavW()
 int SavP()
 {
 	FILE *psav;
-	char pdir[100] = "/mnt/sdcard/Game/Players/Alpha";
+	char pdir[100] = "./Game/Players/Alpha";
 	const char *pnm = "/data";
 	crtdir(pdir);
 	strcat(pdir, pnm);
@@ -651,7 +651,7 @@ int SavP()
 int LoadW()
 {
 	FILE *wld;
-	if ((wld = fopen("/mnt/sdcard/Game/Worlds/World 1/data", "rb")) == NULL)
+	if ((wld = fopen("./Game/Worlds/World 1/data", "rb")) == NULL)
 	{
 		msg.print("Failed to open.");
 		msg.Show();
@@ -692,7 +692,7 @@ int LoadW()
 int LoadP()
 {
 	FILE *pld;
-	if ((pld = fopen("/mnt/sdcard/Game/Players/Alpha/data", "rb")) == NULL)
+	if ((pld = fopen("./Game/Players/Alpha/data", "rb")) == NULL)
 	{
 		msg.print("Failed to open.");
 		msg.Show();
