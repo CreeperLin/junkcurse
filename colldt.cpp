@@ -61,14 +61,15 @@ int BlcSlctm(int oid, int sid)
 
 int BlcSlctp(int oid)
 {
+#if devmode
+	if(player.IsEquipped(33))
+	{
+		return 0;
+	}
+#endif
 	switch (oid)
 	{
 	case 3:
-#if devmode
-		return !player.IsEquipped(33);
-#else
-		return 1;
-#endif
 	case 6:
 	case 13:
 		return 1;

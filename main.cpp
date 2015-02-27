@@ -5,7 +5,6 @@ unsigned short int blk[wlth * wlth];
 gtime tm;
 CPlayer player;
 CMob mob[mobn];
-item witem[inum];
 MsgBox msg;
 int main()
 {

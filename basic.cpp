@@ -292,9 +292,9 @@ int Command()
 	{
 		for (int i = 0; i < inum; i++)
 		{
-			if (!witem[i].plc)
+			if (!world.witem[i].plc)
 			{
-				witem[i].Reset();
+				world.witem[i].Reset();
 			}
 		}
 	}
@@ -303,10 +303,10 @@ int Command()
 		clear();
 		for (int i = 0; i < inum; i++)
 		{
-			if (witem[i].id)
+			if (world.witem[i].id)
 			{
 				printw("%d %s x%d %ld,%ld\n", i,
-					   GetItemNm(witem[i].id), witem[i].amt, witem[i].p.x, witem[i].p.y);
+					   GetItemNm(world.witem[i].id), world.witem[i].amt, world.witem[i].p.x, world.witem[i].p.y);
 			}
 		}
 		refresh();
@@ -416,10 +416,6 @@ void GReset()
 	tolspn = 0;
 	maxspn = 0;
 	spnrt = 0;
-	for (int i = 0; i < inum; i++)
-	{
-		witem[i].Reset();
-	}
 	for (int i = 0; i < mobn; i++)
 	{
 		mob[i].Reset();
@@ -592,10 +588,6 @@ int SavW()
 	refresh();
 	fwrite(&world, sizeof(world), 1, wsav);
 	fwrite(&tm, sizeof(tm), 1, wsav);
-	for (int i = 0; i < inum; i++)
-	{
-		fwrite(&witem[i], sizeof(witem), 1, wsav);
-	}
 	for (int i = 0; i < mobn; i++)
 	{
 		fwrite(&mob[i], sizeof(mob), 1, wsav);
@@ -663,10 +655,6 @@ int LoadW()
 	refresh();
 	fread(&world, sizeof(world), 1, wld);
 	fread(&tm, sizeof(tm), 1, wld);
-	for (int i = 0; i < inum; i++)
-	{
-		fread(&witem[i], sizeof(witem), 1, wld);
-	}
 	for (int i = 0; i < mobn; i++)
 	{
 		fread(&mob[i], sizeof(mob), 1, wld);
@@ -710,7 +698,6 @@ int LoadP()
 		refresh();
 		return 0;
 	}
-	player.p = player.spn;
 	msg.print("%s loaded successfully.", player.name);
 	msg.Show();
 	refresh();

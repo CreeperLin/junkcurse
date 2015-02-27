@@ -29,7 +29,7 @@ int IsItemNear(pos p, int isp)
 {
 	for (int i = 0; i < inum; i++)
 	{
-		if (witem[i].plc == isp && witem[i].p == player.p)
+		if (world.witem[i].plc == isp && world.witem[i].p == player.p)
 		{
 			return 1;
 		}
@@ -41,7 +41,7 @@ int IsItemArnd(int nid)
 {
 	for (int i = 0; i < inum; i++)
 	{
-		if (witem[i].id == nid && witem[i].plc&&witem[i].p + player.p <= 2&&!IsColls(witem[i].p,player.p))
+		if (world.witem[i].id == nid && world.witem[i].plc&&world.witem[i].p + player.p <= 2&&!IsColls(world.witem[i].p,player.p))
 		{
 			return 1;
 		}
@@ -53,8 +53,8 @@ int IsItemNear(pos p, int isp, int nid)
 {
 	for (int i = 0; i < inum; i++)
 	{
-		if (witem[i].id == nid && witem[i].plc == isp
-			&& witem[i].p == player.p)
+		if (world.witem[i].id == nid && world.witem[i].plc == isp
+			&& world.witem[i].p == player.p)
 		{
 			return 1;
 		}
@@ -66,9 +66,9 @@ void AddItem(int nid, int namt, int nlvl, int nmod, int nplc, pos np)
 {
 	for (int i = 0; i < inum; i++)
 	{
-		if (witem[i].id == 0)
+		if (world.witem[i].id == 0)
 		{
-			witem[i].Set(nid, namt, nlvl, nmod, nplc, np);
+			world.witem[i].Set(nid, namt, nlvl, nmod, nplc, np);
 			break;
 		}
 	}

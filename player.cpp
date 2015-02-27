@@ -6,12 +6,12 @@ void CPlayer::Collect()
 	int isrmv = 0;
 	for (int i = 0; i < inum; i++)
 	{
-		if (witem[i].id && !witem[i].plc && witem[i].p + p <= 2)
+		if (world.witem[i].id && !world.witem[i].plc && world.witem[i].p + p <= 2)
 		{
-			msg.print("You picked up %s x%d.", GetItemNm(witem[i].id),
-				   witem[i].amt);
-			AddInv(witem[i].id, witem[i].amt, witem[i].lvl, witem[i].mod);
-			witem[i].Reset();
+			msg.print("You picked up %s x%d.", GetItemNm(world.witem[i].id),
+				   world.witem[i].amt);
+			AddInv(world.witem[i].id, world.witem[i].amt, world.witem[i].lvl, world.witem[i].mod);
+			world.witem[i].Reset();
 			isrmv = 1;
 		}
 	}
@@ -29,11 +29,11 @@ void CPlayer::Remove()
 	int isrmv = 0;
 	for (int i = 0; i < 100; i++)
 	{
-		if (witem[i].id && witem[i].plc && witem[i].p == p)
+		if (world.witem[i].id && world.witem[i].plc && world.witem[i].p == p)
 		{
-			msg.print("You removed a %s.", GetItemNm(witem[i].id));
-			AddInv(witem[i].id, 1, 0, 0);
-			witem[i].Reset();
+			msg.print("You removed a %s.", GetItemNm(world.witem[i].id));
+			AddInv(world.witem[i].id, 1, 0, 0);
+			world.witem[i].Reset();
 			if (spn == p && spn != world.wspn)
 			{
 				spn = world.wspn;
@@ -233,14 +233,15 @@ void CPlayer::Inv()
 		}
 		break;
 	}
-	int tia = slot[tmpi].amt;
 	int ttp = slot[tmpi].type();
 	while (1)
 	{
+		int tia = slot[tmpi].amt;
+		clear();
+		prtinv();
 		msg.Show();	
-		refresh();	
 		CmdInit();
-		printw("1.use 2.place 3.equip/dequip\n4.grab 5.throw 6.adapt 7.decraft 0.exit.\n");
+		printw("You've selected %s x%d.\n1.use 2.place 3.equip/dequip\n4.grab 5.throw 6.adapt 7.decraft 0.exit.\n", GetItemNm(tiid), tia);
 		refresh();
 		int tmpfx = InputNum(8);
 		if (tmpfx == 0)
@@ -336,7 +337,7 @@ void CPlayer::Inv()
 			if (tmpi < 2)
 			{
 				Unequip(tmpi);
-				msg.print("You've took %s x%d back.", GetItemNm(tiid), tia);
+				msg.print("You've took %s x%d off.", GetItemNm(tiid), tia);
 				break;
 			}
 			if (!slot[0].id)
@@ -819,7 +820,7 @@ void CPlayer::Sleep()
 	{
 		for (int i = 0; i < 100; i++)
 		{
-			if (witem[i].id == 26 && witem[i].plc && witem[i].p == p)
+			if (world.witem[i].id == 26 && world.witem[i].plc && world.witem[i].p == p)
 			{
 				hme = 1;
 				break;

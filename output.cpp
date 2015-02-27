@@ -430,18 +430,18 @@ void Obsrv()
 	prtast();
 	for (int i = 0; i < inum; i++)
 	{
-		if (witem[i].id && witem[i].p + player.p <= plsrng && !IsColls(witem[i].p, player.p))
+		if (world.witem[i].id && world.witem[i].p + player.p <= plsrng && !IsColls(world.witem[i].p, player.p))
 		{
-			if (witem[i].plc)
+			if (world.witem[i].plc)
 			{
 				msg.print("You saw a %s on your %s.",
-						  GetItemNm(witem[i].id), GetDirNm(GetDir(player.p, witem[i].p)));
+						  GetItemNm(world.witem[i].id), GetDirNm(GetDir(player.p, world.witem[i].p)));
 			}
 			else
 			{
 				msg.print("You saw %s x%d dropped on your %s.",
-						  GetItemNm(witem[i].id), witem[i].amt,
-						  GetDirNm(GetDir(player.p, witem[i].p)));
+						  GetItemNm(world.witem[i].id), world.witem[i].amt,
+						  GetDirNm(GetDir(player.p, world.witem[i].p)));
 			}
 		}
 	}
@@ -770,9 +770,9 @@ void prtfmp(int rng)
 			}
 			for (int i = 0; i < inum; i++)
 			{
-				if (witem[i].id && witem[i].p == ctop(tx, ty) && witem[i].plc)
+				if (world.witem[i].id && world.witem[i].p == ctop(tx, ty) && world.witem[i].plc)
 				{
-					prtile(GetItemChar(witem[i].id), GetItemCol(witem[i].id));
+					prtile(GetItemChar(world.witem[i].id), GetItemCol(world.witem[i].id));
 					fi = 1;
 					break;
 				}
@@ -817,11 +817,11 @@ void prtmp(int rng)
 			}
 			for (int i = 0; i < inum; i++)
 			{
-				if (witem[i].id && witem[i].p == ctop(tx, ty)
-					&& witem[i].p + player.p <= plsrng
-					&& !IsColls(witem[i].p, player.p) && witem[i].plc)
+				if (world.witem[i].id && world.witem[i].p == ctop(tx, ty)
+					&& world.witem[i].p + player.p <= plsrng
+					&& !IsColls(world.witem[i].p, player.p) && world.witem[i].plc)
 				{
-					prtile(GetItemChar(witem[i].id), GetItemCol(witem[i].id));
+					prtile(GetItemChar(world.witem[i].id), GetItemCol(world.witem[i].id));
 					fi = 1;
 					break;
 				}

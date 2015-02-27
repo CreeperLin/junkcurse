@@ -35,7 +35,6 @@ extern unsigned short int blk[wlth * wlth];
 extern gtime tm;
 extern CPlayer player;
 extern CMob mob[mobn];
-extern item witem[inum];
 extern MsgBox msg;
 extern int fbio,maxspn, spnrt, tolspn;
 #endif

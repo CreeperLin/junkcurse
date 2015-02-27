@@ -36,6 +36,10 @@ void CWorld::Reset()
 	nievt = 0;
 	nmist = 0;
 	WipeEventa();
+	for (int i = 0; i < inum; i++)
+	{
+		witem[i].Reset();
+	}
 }
 
 void CWorld::Init()

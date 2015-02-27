@@ -3,6 +3,7 @@
 #include "pos.h"
 #include "timer.h"
 #include "def.h"
+#include "item.h"
 class CWorld
 {
   public:
@@ -14,6 +15,7 @@ class CWorld
 	int ppbr, pcwd, ppa, pdc, cwdt, dct;
 	int nwthr, nrain, nievt, nmist;
 	timer wtimer[evtn];
+	item witem[inum];
 	void Reset();
 	void Init();
 	void Update();
