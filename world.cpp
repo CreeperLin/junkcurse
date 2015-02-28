@@ -44,7 +44,7 @@ void CWorld::Reset()
 
 void CWorld::Init()
 {
-	sprintf(name, "World 1");
+	sprintf(name, "Zion");
 	seed = time(0);
 	msg.print("seed %ld", seed);
 	srand(seed);
