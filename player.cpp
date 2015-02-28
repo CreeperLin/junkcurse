@@ -112,14 +112,18 @@ void CPlayer::Kill()
 			{
 				int atype = GetAmmoType(wid);
 				if (GetInvAmt(atype) <= 10)
-				{
-					msg.print(15,"Low ammo");
-				}
 				DecInv(atype, 1);
+				{
+					msg.print(15, "Low ammo");
+				}
 			}
 			break;
 		case 10:
 			Adjmana(-GetMpc(wid), 0, 0);
+			if (mp <= 5 * GetMpc(wid))
+			{
+				msg.print(15, "Low mana");
+			}
 		}
 		if (mob[tmpn].Adjhlth
 			(AtkCnt(patk, mob[tmpn].GetDef(), GetCc(i)), 1, -1))
@@ -1082,6 +1086,5 @@ void SetPlpos()
 			break;
 		}
 	}
-	msg.print("You woke up in the %s.", GetBlkNm(tmp));
-	msg.SetAttr(13);
+	msg.print(13, "You woke up in the %s.", GetBlkNm(tmp));
 }

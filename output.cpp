@@ -202,6 +202,7 @@ void prtadjh(int n, int sbj, int evt, int obj)
 		return;
 	}
 	msg.add(", health %+d.", n);
+	msg.SetAttr(8);
 }
 
 void prtdmsg(int sbj, int evt, int obj)
@@ -355,6 +356,10 @@ void prthud()
 	printw("Mana:%d/%d", player.mp, player.mxmp);
 	move(3, 0);
 	prtbar(player.mp, player.mxmp);
+	if (player.isrun)
+	{
+		mvprintw(0, scr_w / 2, "running");
+	}
 	mvprintw(0, scr_w - 5, "Buffs");
 	move(1, scr_w - 2);
 	for (int i = 0; i < 10; i++)
@@ -390,6 +395,7 @@ void prthud()
 	}
 	msg.Init(ctop(0, scr_h - msgh), ctop(scr_w - 1, scr_h - 1));
 	msg.Show();
+	CmdInit();
 	refresh();
 }
 
