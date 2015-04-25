@@ -1,18 +1,18 @@
 #include "main.h"
 using namespace std;
 int Sid[maxs], cnum = 0;
-int GetBPrice(int prc,int cur)
+int GetBPrice(int prc, int cur)
 {
-	return GetItemValue(prc)*GetItemValue(cur);
+	return GetItemValue(prc) / GetItemValue(cur);
 }
 
 int IsCurr(int id)
 {
 	switch (id)
 	{
-		case 18:
-		case 22:
-			return 1;
+	case 18:
+	case 22:
+		return 1;
 	}
 	return 0;
 }
@@ -87,7 +87,7 @@ void prtsell(int mid)
 	while (1)
 	{
 		clear();
-		printw("money:%d %s\n",player.GetInvAmt(curr),cn);
+		printw("money:%d %s\n", player.GetInvAmt(curr), cn);
 		prtinv();
 		CmdInit();
 		printw("Enter number to select,0 to exit.\n");
@@ -99,6 +99,11 @@ void prtsell(int mid)
 		}
 		int sid = player.slot[sn - 1].id;
 		int ta = player.GetInvAmt(sid), tp;
+		if (!sid)
+		{
+			msg.print("You've selected nothing.");
+			continue;
+		}
 		if (IsCurr(sid))
 		{
 			msg.print("You can't sell it.");
@@ -106,10 +111,10 @@ void prtsell(int mid)
 		}
 		else
 		{
-			tp = 0.2 * GetBPrice(sid,curr);
+			tp = 0.2 * GetBPrice(sid, curr);
 		}
 		CmdInit();
-		printw("Price:%d %s\nInput amount to be sold.(total %d)\n", tp,cn, ta);
+		printw("Price:%d %s\nInput amount to be sold.(total %d)\n", tp, cn, ta);
 		refresh();
 		int samt = InputNum(ta);
 		if (!samt)
@@ -136,8 +141,7 @@ void prtrd(int mid)
 		printw("money:%d %s\n", mny, cn);
 		for (int i = 0; i < cnum; i++)
 		{
-			printw("%d.%s %d%s\n", i + 1, GetItemNm(Sid[i]),
-				   GetBPrice(Sid[i],curr), cn);
+			printw("%d.%s %d%s\n", i + 1, GetItemNm(Sid[i]), GetBPrice(Sid[i], curr), cn);
 		}
 		printw("Enter number to select, or 0 to cancel.\n");
 		refresh();
@@ -147,7 +151,7 @@ void prtrd(int mid)
 			return;
 		}
 		tmps--;
-		int prc = GetBPrice(Sid[tmps],curr);
+		int prc = GetBPrice(Sid[tmps], curr);
 		int maxa = mny / prc;
 		if (!maxa)
 		{
@@ -158,7 +162,8 @@ void prtrd(int mid)
 		if (maxa > 1)
 		{
 			CmdInit();
-			printw("You've selected %s.\nEnter amount(max %d), or 0 to cancel.\n",GetItemNm(Sid[tmps]), maxa);
+			printw("You've selected %s.\nEnter amount(max %d), or 0 to cancel.\n",
+				   GetItemNm(Sid[tmps]), maxa);
 			refresh();
 			namt = InputNum(maxa);
 			if (namt == 0)
