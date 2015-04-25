@@ -809,7 +809,7 @@ int GetItemValue(int id)
 	case 17:
 		return 1;
 	case 18:
-		return 5;
+		return 1;
 	case 19:
 		return 2;
 	case 20:
