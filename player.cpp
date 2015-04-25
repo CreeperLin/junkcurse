@@ -232,7 +232,7 @@ void CPlayer::Inv()
 		tiid = slot[tmpi].id;
 		if (!tiid)
 		{
-			msg.print("You've select nothing.");
+			msg.print("You've selected nothing.");
 			continue;
 		}
 		break;
