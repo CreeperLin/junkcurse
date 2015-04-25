@@ -23,22 +23,22 @@ attr_t attr[17];
 
 int mx(int w)
 {
-	return (scr_w - w) / 2;
+	return max(0, (scr_w - w) / 2);
 }
 
 int my(int h)
 {
-	return (scr_h - h) / 2;
+	return max(0, (scr_h - h) / 2);
 }
 
 int mx(int w, int cw)
 {
-	return (cw - w) / 2;
+	return max(0, (cw - w) / 2);
 }
 
 int my(int h, int ch)
 {
-	return (ch - h) / 2;
+	return max(0, (ch - h) / 2);
 }
 
 int cx()
@@ -436,12 +436,14 @@ void Obsrv()
 	prtast();
 	for (int i = 0; i < inum; i++)
 	{
-		if (world.witem[i].id && world.witem[i].p + player.p <= plsrng && !IsColls(world.witem[i].p, player.p))
+		if (world.witem[i].id && world.witem[i].p + player.p <= plsrng
+			&& !IsColls(world.witem[i].p, player.p))
 		{
 			if (world.witem[i].plc)
 			{
 				msg.print("You saw a %s on your %s.",
-						  GetItemNm(world.witem[i].id), GetDirNm(GetDir(player.p, world.witem[i].p)));
+						  GetItemNm(world.witem[i].id),
+						  GetDirNm(GetDir(player.p, world.witem[i].p)));
 			}
 			else
 			{
@@ -805,7 +807,7 @@ void prtfmp(int rng)
 			prtile(GetBlkChar(blk[blki(tx, ty)]), GetBlkCol(blk[blki(tx, ty)]));
 		}
 		move(cy() + 1, tmx);
-	}	
+	}
 	refresh();
 }
 
