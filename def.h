@@ -9,6 +9,7 @@
 #define mobid 22
 #define blkid 16
 #define itmid 49
+#define bufid 4
 #define maxi 10
 #define pnum 8
 #define maxs 20
