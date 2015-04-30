@@ -85,7 +85,7 @@ int Command()
 	else if (!strcmp(tpc, "clrmsg"))
 	{
 		msg.Clear();
-	}	
+	}
 	else if (!strcmp(tpc, "bang"))
 	{
 		Explode(player.p, 44);
@@ -198,7 +198,7 @@ int Command()
 	else if (!strcmp(tpc, "stat"))
 	{
 		prtst();
-		getch();	
+		getch();
 	}
 	else if (!strcmp(tpc, "wstat"))
 	{
@@ -306,7 +306,8 @@ int Command()
 			if (world.witem[i].id)
 			{
 				printw("%d %s x%d %ld,%ld\n", i,
-					   GetItemNm(world.witem[i].id), world.witem[i].amt, world.witem[i].p.x, world.witem[i].p.y);
+					   GetItemNm(world.witem[i].id), world.witem[i].amt, world.witem[i].p.x,
+					   world.witem[i].p.y);
 			}
 		}
 		refresh();
@@ -572,7 +573,7 @@ void crtdir(const char *dir)
 int SavW()
 {
 	FILE *wsav;
-	char wdir[100] = WDIR"/Zion";
+	char wdir[100] = WDIR "/Zion";
 	const char *bnm = "/data";
 	crtdir(wdir);
 	strcat(wdir, bnm);
@@ -590,7 +591,7 @@ int SavW()
 	fwrite(&tm, sizeof(tm), 1, wsav);
 	for (int i = 0; i < mobn; i++)
 	{
-		fwrite(&mob[i], sizeof(mob), 1, wsav);
+		fwrite(&mob[i], sizeof(mob[i]), 1, wsav);
 	}
 	for (int i = 0; i < wlth * wlth; i++)
 	{
@@ -612,7 +613,7 @@ int SavW()
 int SavP()
 {
 	FILE *psav;
-	char pdir[100] = PDIR"/Alpha";
+	char pdir[100] = PDIR "/Alpha";
 	const char *pnm = "/data";
 	crtdir(pdir);
 	strcat(pdir, pnm);
@@ -643,7 +644,7 @@ int SavP()
 int LoadW()
 {
 	FILE *wld;
-	if ((wld = fopen(WDIR"/Zion/data", "rb")) == NULL)
+	if ((wld = fopen(WDIR "/Zion/data", "rb")) == NULL)
 	{
 		msg.print("Failed to open.");
 		msg.Show();
@@ -657,7 +658,7 @@ int LoadW()
 	fread(&tm, sizeof(tm), 1, wld);
 	for (int i = 0; i < mobn; i++)
 	{
-		fread(&mob[i], sizeof(mob), 1, wld);
+		fread(&mob[i], sizeof(mob[i]), 1, wld);
 	}
 	srand(world.seed);
 	for (int i = 0; i < wlth * wlth; i++)
@@ -680,7 +681,7 @@ int LoadW()
 int LoadP()
 {
 	FILE *pld;
-	if ((pld = fopen(PDIR"/Alpha/data", "rb")) == NULL)
+	if ((pld = fopen(PDIR "/Alpha/data", "rb")) == NULL)
 	{
 		msg.print("Failed to open.");
 		msg.Show();
