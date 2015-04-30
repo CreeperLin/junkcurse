@@ -111,7 +111,12 @@ void prtsell(int mid)
 		}
 		else
 		{
-			tp = 0.2 * GetBPrice(sid, curr);
+			tp = 0.5 * GetBPrice(sid, curr);
+			if (!tp)
+			{
+				msg.print("No value.");
+				continue;
+			}
 		}
 		CmdInit();
 		printw("Price:%d %s\nInput amount to be sold.(total %d)\n", tp, cn, ta);
