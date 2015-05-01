@@ -111,8 +111,8 @@ void CPlayer::Kill()
 		case 9:
 			{
 				int atype = GetAmmoType(wid);
-				if (GetInvAmt(atype) <= 10)
 				DecInv(atype, 1);
+				if (GetInvAmt(atype) <= 10)
 				{
 					msg.print(15, "Low ammo");
 				}
