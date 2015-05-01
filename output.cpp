@@ -382,7 +382,7 @@ void prthud()
 	}
 	move(my(13, scr_h - 4 - msgh - comh), mx(26));
 #if devmode
-	player.IsEquipped(32) ? prtfmp(8) : prtmp(6);
+	player.IsEquipped(32) ? prtfmp(player.p, 8) : prtmp(6);
 #else
 	prtmp(6);
 #endif
@@ -764,12 +764,12 @@ void prthmp(int wid)
 	refresh();
 }
 
-void prtfmp(int rng)
+void prtfmp(pos cp, int rng)
 {
 	int mf = 0, fi = 0, tmx = cx();
-	for (int ty = player.p.y - rng; ty <= player.p.y + rng; ty++)
+	for (int ty = cp.y - rng; ty <= cp.y + rng; ty++)
 	{
-		for (int tx = player.p.x - rng; tx <= player.p.x + rng; tx++)
+		for (int tx = cp.x - rng; tx <= cp.x + rng; tx++)
 		{
 			if (player.p == ctop(tx, ty))
 			{
