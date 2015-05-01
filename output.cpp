@@ -110,7 +110,7 @@ void prtbuff(int bid, int sbj, int obj)
 	}
 	msg.print("%s inflict %s buff on %s.", objn, GetBuffNm(bid), sbjn);
   attrset:
-	if (sbj == -1)
+	if (sbj == -1 || obj == -1)
 	{
 		msg.SetAttr(15);
 	}
