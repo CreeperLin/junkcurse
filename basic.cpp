@@ -130,7 +130,7 @@ int Command()
 	else if (!strcmp(tpc, "map"))
 	{
 		clear();
-		prtfmp(min(scr_h, scr_w / 2) / 2 - 1);
+		prtfmp(player.p, min(scr_h, scr_w / 2) / 2 - 1);
 		getch();
 	}
 	else if (!strcmp(tpc, "hmap"))
@@ -342,7 +342,10 @@ int Command()
 		{
 			if (mob[i].id)
 			{
+				getch();
+				clear();
 				prtmst(i);
+				refresh();
 			}
 		}
 		refresh();
@@ -381,28 +384,26 @@ int Command()
 	}
 	else if (!strcmp(tpc, "demo"))
 	{
+		pos cp = ctop(0,0);
 		int width = scr_w / 4 - 1;
-		player.p.x = 0;
-		player.p.y = 0;
-		while (player.p.x < wlth)
+		while (cp.x < wlth)
 		{
 			clear();
-			player.p.x += 1;
-			player.p.y += 1;
-			prtfmp(width);
+			cp.x += 1;
+			cp.y += 1;
+			prtfmp(cp, width);
 			usleep(50000);
 		}
-		player.p.x = 0;
-		player.p.y = wlth - 1;
-		while (player.p.x < wlth)
+		cp.x = 0;
+		cp.y = wlth - 1;
+		while (cp.x < wlth)
 		{
 			clear();
-			player.p.x += 1;
-			player.p.y -= 1;
-			prtfmp(width);
+			cp.x += 1;
+			cp.y -= 1;
+			prtfmp(cp, width);
 			usleep(50000);
 		}
-		player.p = player.spn;
 	}
 	else
 	{
