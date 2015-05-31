@@ -1,5 +1,6 @@
 #include "main.h"
 using namespace std;
+CStatdb Statdb;
 CWorld world;
 unsigned short int blk[wlth * wlth];
 gtime tm;
@@ -93,4 +94,3 @@ void Refresh()
 		}
 	}
 }
-
