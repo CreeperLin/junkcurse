@@ -89,6 +89,7 @@ class CMobStatdb
 	int ste;
 	int dexp;
 	int colltyp;
+	int rarity;
 	char *quote[3];
 	// TODO effect
 	// ToDo drops
@@ -104,6 +105,7 @@ class CMobNPCStatdb:public CMobStatdb
 class CStatdb
 {
   public:
+	CStatdb();
 	CMobStatdb MobStat[mobid];
 	CItemStatdb ItemStat[itemid];
 	CBlkStatdb BlkStat[blkid];
