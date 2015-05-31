@@ -30,6 +30,7 @@
 #include <sys/stat.h>
 #include <ncurses.h>
 void Refresh();
+extern CStatdb Statdb;
 extern CWorld world;
 extern unsigned short int blk[wlth * wlth];
 extern gtime tm;
