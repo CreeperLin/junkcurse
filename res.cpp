@@ -465,7 +465,7 @@ int GetMobSize(int id)
 	}
 }
 
-const char *GetMobQuotation(int id, int num)
+const char *GetMobQuote(int id, int num)
 {
 	switch (id)
 	{
@@ -493,7 +493,7 @@ const char *GetMobQuotation(int id, int num)
 			return "You don't know what pain really is,do you?";
 		case 2:
 			return "Step away!";
-			case 3;
+		case 3:
 			return "You don't wanna get hurt,do you?";
 		case 4:
 			return "You don't belong here,Stranger.";
@@ -519,7 +519,8 @@ const char *GetMobQuotation(int id, int num)
 		case 1:
 			return "I'm gonna shoot your head.";
 		case 2:
-		return "How dare you!" case 3:
+			return "How dare you!";
+		case 3:
 			return "Shh...";
 		case 4:
 			return "That's dinner!";
@@ -564,15 +565,15 @@ const char *GetMobQuotation(int id, int num)
 			return "Welcome to our shed for a rest.";
 		case 4:
 			return "You look exhausted,have a gulp of our milk!";
-		case 0:
+		case 5:
 			return "We have wool, but we don't know how to sew.";
-		case 1:
+		case 6:
 			return "Try these cheese!";
-		case 0:
+		case 7:
 			return "Hope you enjoy our milk.";
-		case 1:
+		case 8:
 			return "Some of us have gone hunting and never return.";
-		case 2:
+		case 9:
 			return "Those Cavemen, have a kind of precious gem which was robbed from us.";
 		}
 		break;
@@ -586,7 +587,7 @@ const char *GetMobQuotation(int id, int num)
 		case 2:
 			return "We live together, for safety.";
 		case 3:
-			return "Welcone to our...village?";
+			return "Welcome to our...village?";
 		case 4:
 			return "I used to be a shepherd, but I grow corn for a living now.";
 		case 5:
@@ -624,61 +625,6 @@ const char *GetMobQuotation(int id, int num)
 		break;
 	default:
 		return "...";
-	}
-}
-
-const char *GetMobQuote(int id, int sit)
-{
-	switch (id)
-	{
-	case 1:
-	case 2:
-	case 3:
-		switch (ste)
-		{
-		case 1:
-		case 2:
-			return GetMobQuotation(1, rand() % 3);
-		case 4:
-			return GetMobQuotation(1, 3);
-		}
-		break;
-	case 14:
-		switch (sit)
-		{
-		case 0:
-			if (tgt == -1)
-			{
-				return GetMobQuotation(14, 1 + rand() % 2);
-			}
-			else if (tgt > 0)
-			{
-			return GetMobQuotation(14, 3 + rand() % 2)}
-			else
-			{
-				if (player.IsGrab(21))
-				{
-					return GetMobQuotation(14, 0);
-				}
-				return GetMobQuotation(14, 5 + rand() % 3);
-			}
-		case 1:
-			return GetMobQuotation(14, 8 + rand() % 2);
-		case 2:
-			return GetMobQuotation(14, 10 + rand() % 2);
-		}
-		break;
-	case 11:
-		return "(silenced)";
-	case 18:
-		return "(silenced)";
-	case 15:
-	case 16:
-	case 17:
-		return GetMobQuotation(15, 0);
-	default:
-		return "...";
-		return 0;
 	}
 }
 

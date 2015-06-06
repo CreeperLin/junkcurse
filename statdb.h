@@ -66,6 +66,12 @@ class CItemWearStatdb:public CItemStatdb
 	int amrdef;
 };
 
+class CItemAccStatdb:public CItemStatdb
+{
+  public:
+	//todo accessory effect
+};
+
 class CItemAmmoStatdb:public CItemStatdb
 {
   public:
@@ -90,7 +96,7 @@ class CMobStatdb
 	int dexp;
 	int colltyp;
 	int rarity;
-	char *quote[3];
+	char *quote[15];
 	// TODO effect
 	// ToDo drops
 	//TODO relation
@@ -107,12 +113,8 @@ class CStatdb
   public:
 	CStatdb();
 	CMobStatdb MobStat[mobid];
-	CItemStatdb ItemStat[itemid];
+	CItemStatdb ItemStat[itmid];
 	CBlkStatdb BlkStat[blkid];
-	CBufStatdb BufStat[bufid];
-	CEventStatdb EventStat;
-};
-#endiftdb BlkStat[blkid];
 	CBufStatdb BufStat[bufid];
 	CEventStatdb EventStat;
 };

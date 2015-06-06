@@ -541,31 +541,115 @@ void CMob::Spawn(int tid, int num, pos sp)
 int CMob::Speak(int sit)
 {
 	msg.print("%s: ", name());
-	msg.add(GetMobQuote(id, sit));
+	int qnum;
+	switch (id)
+	{
+	case 1:
+	case 2:
+	case 3:
+		switch (ste)
+		{
+		case 1:
+		case 2:
+			qnum = rand() % 3;
+			break;
+		case 4:
+			qnum = 3;
+			break;
+		}
+		break;
+	case 14:
+		switch (sit)
+		{
+		case 0:
+			if (tgt == -1)
+			{
+				qnum = 1 + rand() % 2;
+			}
+			else if (tgt > 0)
+			{
+				qnum = 3 + rand() % 2;
+			}
+			else
+			{
+				if (player.IsGrab(21))
+				{
+					qnum = 0;
+				}
+				qnum = 5 + rand() % 3;
+			}
+			break;
+		case 1:
+			qnum = 8 + rand() % 2;
+			break;
+		case 2:
+			qnum = 10 + rand() % 2;
+			break;
+		}
+		break;
+	case 11:
+		switch (sit)
+		{
+		case 0:
+			if (tgt == -1)
+			{
+				qnum = rand() % 2;
+			}
+			else if (tgt > 0)
+			{
+				qnum = 2 + rand() % 2;
+			}
+			else
+			{
+				qnum = 4 + rand() % 3;
+			}
+			break;
+		case 1:
+			qnum = 7 + rand() % 2;
+			break;
+		case 2:
+			qnum = 9 + rand() % 2;
+			break;
+		}
+		break;
+	case 18:
+		switch (sit)
+		{
+		case 0:
+			if (tgt == -1)
+			{
+				qnum = rand() % 2;
+			}
+			else
+			{
+				qnum = 2 + rand() % 3;
+			}
+			break;
+		case 1:
+			qnum = 5 + rand() % 2;
+			break;
+		case 2:
+			qnum = 7 + rand() % 3;
+			break;
+		}
+		break;
+	case 15:
+	case 16:
+	case 17:
+		qnum = 0;
+		break;
+	default:
+		qnum = 0;
+	}
+	msg.add(GetMobQuote(id, qnum));
 	switch (id)
 	{
 	case 11:
 	case 14:
-		if (tgt == -1)
-		{
-			return 0;
-		}
-		else if (tgt > 0)
-		{
-			return 0;
-		}
-		else
-		{
-			return 1;
-		}
 	case 18:
 	case 20:
 	case 21:
-		if (tgt == -1)
-		{
-			return 0;
-		}
-		else
+		if (tgt == 0)
 		{
 			return 1;
 		}

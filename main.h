@@ -20,6 +20,7 @@
 #include "timer.h"
 #include "key.h"
 #include "msgbox.h"
+#include "statdb.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
