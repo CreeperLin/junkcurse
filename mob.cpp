@@ -214,7 +214,7 @@ void CMob::Mmove(int dir)
 	{
 		for (int i = 0; i < 7; i++)
 		{
-			int t = -1 + randr(0, 1) * 2; 
+			int t = -1 + randr(0, 1) * 2;
 			dir += t;
 			if (dir > 8)
 			{
@@ -249,7 +249,7 @@ void CMob::Mmove(pos op)
 	{
 		for (int i = 0; i < 7; i++)
 		{
-			int t = -1 + randr(0, 1) * 2; 
+			int t = -1 + randr(0, 1) * 2;
 			dir += t;
 			if (dir > 8)
 			{
@@ -541,370 +541,34 @@ void CMob::Spawn(int tid, int num, pos sp)
 int CMob::Speak(int sit)
 {
 	msg.print("%s: ", name());
+	msg.add(GetMobQuote(id, sit));
 	switch (id)
 	{
-	case 1:
-	case 2:
-	case 3:
-		switch (ste)
-		{
-		case 1:
-		case 2:
-			switch (rand() % 3)
-			{
-			case 0:
-				msg.add(":-D");
-				break;
-			case 1:
-				msg.add(":-)");
-				break;
-			case 2:
-				msg.add(":-O");
-				break;
-			}
-			break;
-		case 4:
-			msg.add(">_<");
-		}
-		break;
-	case 14:
-		switch (sit)
-		{
-		case 0:
-			if (player.IsGrab(21))
-			{
-				msg.add("Your bow looks familar...");
-				return 1;
-			}
-			if (tgt == -1)
-			{
-				switch (rand() % 2)
-				{
-				case 0:
-					msg.add("I'm gonna shoot your head.");
-					break;
-				case 1:
-					msg.add("How dare you!");
-					break;
-				}
-				return 0;
-			}
-			else if (tgt > 0)
-			{
-				switch (rand() % 2)
-				{
-				case 0:
-					msg.add("Shh...");
-					break;
-				case 1:
-					msg.add("That's dinner!");
-					break;
-				}
-				return 0;
-			}
-			else
-			{
-				switch (rand() % 2)
-				{
-				case 0:
-					msg.add("Hey! Stop messing around in my forest!");
-					break;
-				case 1:
-					if (tm.IsNt())
-					{
-						msg.add("Stay in my hut through the night if you like.");
-					}
-					else
-					{
-						msg.add("Better go hunting before dark.");
-					}
-					break;
-				}
-				return 1;
-			}
-			break;
-		case 1:
-			switch (rand() % 2)
-			{
-			case 0:
-				msg.add("Here's all I've got.");
-				break;
-			case 1:
-				msg.add("I can sell you everything I have except this bow.");
-				break;
-			}
-			break;
-		case 2:
-			switch (rand() % 2)
-			{
-			case 0:
-				msg.add("Try not to lose your life in the forest.");
-				break;
-			case 1:
-				msg.add("There's a mystery in the jungle.");
-				break;
-			}
-			break;
-		}
-		break;
 	case 11:
-		switch (sit)
+	case 14:
+		if (tgt == -1)
 		{
-		case 0:
-			if (tgt == -1)
-			{
-				switch (rand() % 2)
-				{
-				case 0:
-					msg.add("You'll be punished.");
-					break;
-				case 1:
-					msg.add("You don't know what pain really is,do you?");
-					break;
-				}
-				return 0;
-			}
-			else if (tgt > 0)
-			{
-				switch (rand() % 2)
-				{
-				case 0:
-					msg.add("Step away!");
-					break;
-				case 1:
-					msg.add("You don't wanna get hurt,do you?");
-					break;
-				}
-				return 1;
-			}
-			else
-			{
-				switch (rand() % 3)
-				{
-				case 0:
-					msg.add("You don't belong here,Stranger.");
-					break;
-				case 1:
-					msg.add("Aren't you afraid of the dark?");
-					break;
-				case 2:
-					msg.add("How did you find me?");
-					break;
-				}
-				return 1;
-			}
-			break;
-		case 1:
-			switch (rand() % 2)
-			{
-			case 0:
-				msg.add("I made these myself.");
-				break;
-			case 1:
-				msg.add("Wanna try the spine?");
-				break;
-			}
-			break;
-		case 2:
-			switch (rand() % 2)
-			{
-			case 0:
-				msg.add("You look just like those living in caves.");
-				break;
-			case 1:
-				msg.add("Nothing can ever destroy the jungle.");
-				break;
-			}
-			break;
+			return 0;
 		}
-		break;
+		else if (tgt > 0)
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
+		}
 	case 18:
-		switch (sit)
-		{
-		case 0:
-			if (tgt == -1)
-			{
-				switch (rand() % 2)
-				{
-				case 0:
-					msg.add("You should burn.");
-					break;
-				case 1:
-					msg.add("Why harm us?");
-					break;
-				}
-				return 0;
-			}
-			else
-			{
-				switch (rand() % 3)
-				{
-				case 0:
-					msg.add("We're shepherds, living on the plain.");
-					break;
-				case 1:
-					msg.add("Welcome to our shed for a rest.");
-					break;
-				case 2:
-					msg.add("You look exhausted,have a gulp of our milk!");
-					break;
-				}
-				return 1;
-			}
-			break;
-		case 1:
-			switch (rand() % 2)
-			{
-			case 0:
-				msg.add("We have wool, but we don't know how to sew.");
-				break;
-			case 1:
-				msg.add("Try these cheese!");
-				break;
-			}
-			break;
-		case 2:
-			switch (rand() % 3)
-			{
-			case 0:
-				msg.add("Hope you enjoy our milk.");
-				break;
-			case 1:
-				msg.add("Some of us have gone hunting and never return.");
-				break;
-			case 2:
-				msg.add("Those Cavemen, have a kind of precious gem which was robbed from us.");
-				break;
-			}
-			break;
-		}
-		break;
-	case 15:
-	case 16:
-	case 17:
-		{
-			char tmp[16];
-			for (int i = 0; i < randr(8, 16); i++)
-			{
-				tmp[i] = randr(64, 122);
-			}
-			msg.add(tmp);
-			break;
-		}
 	case 20:
-		switch (sit)
-		{
-		case 0:
-			if (tgt == -1)
-			{
-				switch (rand() % 2)
-				{
-				case 0:
-					msg.add("Ouch! What's wrong with you.");
-					break;
-				case 1:
-					msg.add("Ahh... Stay away from me!");
-					break;
-				}
-				return 0;
-			}
-			else
-			{
-				switch (rand() % 3)
-				{
-				case 0:
-					msg.add("We live together, for safety.");
-					break;
-				case 1:
-					msg.add("Welcone to our...village?");
-					break;
-				case 2:
-					msg.add("I used to be a shepherd, but I grow corn for a living now.");
-					break;
-				}
-				return 0;
-			}
-			break;
-		case 2:
-			switch (rand() % 3)
-			{
-			case 0:
-				msg.add("Some guys here make nice weapons.");
-				break;
-			case 1:
-				msg.add("Some guys here are good at crafting.");
-				break;
-			case 2:
-				msg.add("You can host in my house for as long as I'm alive.");
-				break;
-			}
-			break;
-		}
-		break;
 	case 21:
-		switch (sit)
+		if (tgt == -1)
 		{
-		case 0:
-			if (tgt == -1)
-			{
-				switch (rand() % 2)
-				{
-				case 0:
-					msg.add("Hey!");
-					break;
-				case 1:
-					msg.add("Stop it!");
-					break;
-				}
-				return 0;
-			}
-			else
-			{
-				switch (rand() % 3)
-				{
-				case 0:
-					msg.add("My dad taught me crafting, and I love it.");
-					break;
-				case 1:
-					msg.add("I'm a Craftsman, selling hand-made stuff.");
-					break;
-				case 2:
-					msg.add("Are you looking for some handy stuff?");
-					break;
-				}
-				return 1;
-			}
-			break;
-		case 1:
-			switch (rand() % 2)
-			{
-			case 0:
-				msg.add("These are all made out of wood.");
-				break;
-			case 1:
-				msg.add("Buy this Crossbow if you want to be a Ranger.");
-				break;
-			}
-			break;
-		case 2:
-			switch (rand() % 3)
-			{
-			case 0:
-				msg.add("I can teach you to craft your bow into crossbow.");
-				break;
-			case 1:
-				msg.add("Go meet the blacksmith if you'd like to get armored.");
-				break;
-			case 2:
-				msg.add("I have run out of wood, I wonder if you have some.");
-				break;
-			}
-			break;
+			return 0;
 		}
-		break;
-	default:
-		msg.add("...");
-		return 0;
+		else
+		{
+			return 1;
+		}
 	}
 	return 0;
 }

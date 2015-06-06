@@ -112,4 +112,8 @@ class CStatdb
 	CBufStatdb BufStat[bufid];
 	CEventStatdb EventStat;
 };
+#endiftdb BlkStat[blkid];
+	CBufStatdb BufStat[bufid];
+	CEventStatdb EventStat;
+};
 #endif

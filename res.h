@@ -44,3 +44,8 @@ int GetItemAdmg(int id);
 int GetExRng(int id);
 int GetExDmg(int id);
 #endif
+e(int wid);
+int GetItemAdmg(int id);
+int GetExRng(int id);
+int GetExDmg(int id);
+#endif
