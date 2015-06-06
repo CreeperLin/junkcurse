@@ -1,6 +1,25 @@
 #ifndef _STATDB_H_
 #define _STATDB_H_
 #include "def.h"
+struct StatEffect
+{
+	int type;
+	int val1;
+	int val2;
+};
+
+struct StatRecipe
+{
+	int type;
+	int amt;
+};
+
+struct StatDrop
+{
+	int type;
+	int rate;
+};
+
 class CEventStatdb
 {
   public:
@@ -12,7 +31,7 @@ class CBufStatdb
 {
   public:
 	char *name;
-	// todo effect
+	StatEffect bufx;
 };
 
 class CBlkStatdb
@@ -30,7 +49,7 @@ class CItemStatdb
 	int val;
 	int type;
 	int att;
-	// TODO craft recipe
+	StatRecipe crftrcp[maxi];
 };
 
 class CItemConsumStatdb:public CItemStatdb
@@ -46,6 +65,7 @@ class CItemWpnStatdb:public CItemStatdb
 	int wpntyp;
 	int wpndmg;
 	int wpncric;
+	StatEffect wpnfx;
 	//TODO weapon effect
 };
 
@@ -69,7 +89,7 @@ class CItemWearStatdb:public CItemStatdb
 class CItemAccStatdb:public CItemStatdb
 {
   public:
-	//todo accessory effect
+	StatEffect accfx[5];
 };
 
 class CItemAmmoStatdb:public CItemStatdb
@@ -97,15 +117,15 @@ class CMobStatdb
 	int colltyp;
 	int rarity;
 	char *quote[15];
-	// TODO effect
-	// ToDo drops
+	StatEffect bufcst[5];
+	StatDrop drop[10];
 	//TODO relation
 };
 
 class CMobNPCStatdb:public CMobStatdb
 {
   public:
-	// TODO sells
+	int sellid[maxs];
 };
 
 class CStatdb
