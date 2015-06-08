@@ -18,7 +18,7 @@ struct StatDrop
 {
 	int type;
 	int amin;
-	int amax
+	int amax;
 	int rate;
 };
 

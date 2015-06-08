@@ -29,7 +29,7 @@ void CStatdb::Reset()
 void CStatdb::DumpRes()
 {
 	// mob stat
-	for (int i = 0; i < mobid; i++)
+	for (int i = 0; i < mobid; i++, mobc++)
 	{
 		int cur = GetCurr(i);
 		if (cur)
@@ -59,7 +59,8 @@ void CStatdb::DumpRes()
 		ref->rarity = GetMobRarity(i);
 		for (int j = 0; j < 20; j++)
 		{
-			if ((const char *q = GetMobQuote(i, j)) == NULL)
+			const char *q = GetMobQuote(i, j);
+			if (q == NULL)
 			{
 				break;
 			}
@@ -78,6 +79,14 @@ void CStatdb::DumpRes()
 			TrReset();
 			SetSell(i);
 			extern int Sid[maxs];
+			for (int j = 0; j < maxs; j++)
+			{
+				if (!Sid[j])
+				{
+					break;
+				}
+				ref2->sellid[j] = Sid[j];
+			}
 		}
 	}
 	// item stat
