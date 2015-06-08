@@ -10,6 +10,7 @@
 #define blkid 16
 #define itmid 49
 #define bufid 4
+#define evtid 15
 #define maxi 10
 #define pnum 8
 #define maxs 20

@@ -17,34 +17,36 @@ struct StatRecipe
 struct StatDrop
 {
 	int type;
+	int amin;
+	int amax
 	int rate;
 };
 
 class CEventStatdb
 {
   public:
-	char *name;
+	const char *name;
 	// TODO effect&type
 };
 
 class CBufStatdb
 {
   public:
-	char *name;
+	const char *name;
 	StatEffect bufx;
 };
 
 class CBlkStatdb
 {
   public:
-	char *name;
+	const char *name;
 	int colltyp;
 };
 
 class CItemStatdb
 {
   public:
-	char *name;
+	const char *name;
 	int mxstk;
 	int val;
 	int type;
@@ -66,7 +68,6 @@ class CItemWpnStatdb:public CItemStatdb
 	int wpndmg;
 	int wpncric;
 	StatEffect wpnfx;
-	//TODO weapon effect
 };
 
 class CItemWpnMnStatdb:public CItemWpnStatdb
@@ -101,11 +102,12 @@ class CItemAmmoStatdb:public CItemStatdb
 class CMobStatdb
 {
   public:
-	char *name;
+	const char *name;
 	int ht;
 	int mt;
-	int matk;
-	int ratk;
+	int mlatk;
+	int rgatk;
+	int mnatk;
 	int def;
 	int rng;
 	int srng;
@@ -116,26 +118,46 @@ class CMobStatdb
 	int dexp;
 	int colltyp;
 	int rarity;
-	char *quote[15];
-	StatEffect bufcst[5];
+	const char *quote[20];
+	StatEffect mlbuf;
+	StatEffect rgbuf;
+	StatEffect mnbuf;
 	StatDrop drop[10];
 	//TODO relation
+	//todo spawn condition
 };
 
 class CMobNPCStatdb:public CMobStatdb
 {
   public:
+	int sellcur;
 	int sellid[maxs];
 };
 
 class CStatdb
 {
   public:
-	CStatdb();
-	CMobStatdb MobStat[mobid];
-	CItemStatdb ItemStat[itmid];
-	CBlkStatdb BlkStat[blkid];
-	CBufStatdb BufStat[bufid];
-	CEventStatdb EventStat;
+	void Reset();
+	void DumpRes();
+	void AddMob();
+	void AddItem();
+	void AddBlk();
+	void AddBuf();
+	void AddEvt();
+	void ChgMob();
+	void ChgItem();
+	void ChgBlk();
+	void ChgBuf();
+	void ChgEvt();
+	int mobc;
+	int itmc;
+	int blkc;
+	int bufc;
+	int evtc;
+	CMobStatdb* MobStat[mobid];
+	CItemStatdb* ItemStat[itmid];
+	CBlkStatdb* BlkStat[blkid];
+	CBufStatdb* BufStat[bufid];
+	CEventStatdb* EventStat[evtid];
 };
 #endif
