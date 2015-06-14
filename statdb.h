@@ -138,7 +138,6 @@ class CStatdb
 {
   public:
 	void Reset();
-	void DumpRes();
 	void AddMob();
 	void AddItem();
 	void AddBlk();
