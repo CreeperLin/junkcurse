@@ -641,7 +641,15 @@ int CMob::Speak(int sit)
 	default:
 		qnum = 0;
 	}
-	msg.add(GetMobQuote(id, qnum));
+	const char *q = GetMobQuote(id, qnum);
+	if (q == NULL)
+	{
+		msg.add("...");
+	}
+	else
+	{
+		msg.add(q);
+	}
 	switch (id)
 	{
 	case 11:

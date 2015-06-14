@@ -28,6 +28,7 @@ int GetCurr(int mid)
 	case 21:
 		return 18;
 	}
+	return 0;
 }
 
 const char *GetCurrNm(int id)

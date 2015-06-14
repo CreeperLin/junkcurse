@@ -624,7 +624,7 @@ const char *GetMobQuote(int id, int num)
 		}
 		break;
 	default:
-		return "...";
+		return NULL;
 	}
 }
 
