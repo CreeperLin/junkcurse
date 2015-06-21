@@ -4,7 +4,6 @@ unsigned key[25];
 int KeyEvent()
 {
 	unsigned int ch = getch();
-	prthud();
 	if (ch == key[0])
 	{
 		return 0;
@@ -113,6 +112,10 @@ int KeyEvent()
 	else if (ch == key[23])
 	{
 		player.Qmana();
+	}
+	else
+	{
+		return -1;
 	}
 	return 1;
 }
