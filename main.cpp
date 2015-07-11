@@ -34,12 +34,22 @@ int main()
 		refresh();
 		while (1)
 		{
-			if (!KeyEvent())
+			int key = KeyEvent();
+			if (key == 0)
 			{
-				if (Command())
+				int cmd = Command();
+				if (cmd == 1)
 				{
 					break;
 				}
+				else if (cmd == -1)
+				{
+					continue;
+				}
+			}
+			else if (key == -1)
+			{
+				continue;
 			}
 			prthud();
 			if (player.health <= 0)

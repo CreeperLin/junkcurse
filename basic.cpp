@@ -44,7 +44,7 @@ int Command()
 	tpc = strtok(input, " ");
 	if (!tpc)
 	{
-		return 0;
+		return -1;
 	}
 	if (!strcmp(tpc, "exit"))
 	{
@@ -408,6 +408,7 @@ int Command()
 	else
 	{
 		ExceptionProc();
+		return -1;
 	}
 	return 0;
 }
