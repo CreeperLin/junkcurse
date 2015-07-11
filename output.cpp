@@ -1,7 +1,7 @@
 #include "main.h"
 using namespace std;
 int scr_w, scr_h;
-attr_t attr[17];
+attr_t attr[200];
 // attr list 
 // 0 white(default) 
 // 1 black 
@@ -77,18 +77,26 @@ void printwr(int attn, const char *ch, ...)
 
 void initattr()
 {
-	for (int c = 0; c < 8; c++)
+	int p = 1;
+	for (int bg = 0; bg < COLORS; bg++)
 	{
-		init_pair(c + 1, c, COLOR_BLACK);
+		for (int fg = 0; fg < COLORS; fg++)
+		{
+			init_pair(p, fg, bg);
+			p++;
+		}
 	}
-	int p = 0;
-	for (int j = 0; j < 8; j++)
+	p = 0;
+	for (int i = 0; i < COLORS; i++)
 	{
-		attr[p++] = COLOR_PAIR(j);
-	}
-	for (int j = 0; j < 8; j++)
-	{
-		attr[p++] = COLOR_PAIR(j) | A_BOLD;
+		for (int j = 0; j < COLORS; j++)
+		{
+			attr[p++] = COLOR_PAIR(COLORS * i + j);
+		}
+		for (int j = 0; j < COLORS; j++)
+		{
+			attr[p++] = COLOR_PAIR(COLORS * i + j) | A_BOLD;
+		}
 	}
 }
 
@@ -729,6 +737,11 @@ const char GetItemChar(int id)
 	}
 }
 
+int GetBCol(int fc)
+{
+	return fc > 7 ? fc - 8 : fc;
+}
+
 void prthmp(int wid)
 {
 	clear();
@@ -757,7 +770,7 @@ void prthmp(int wid)
 					maxb = i;
 				}
 			}
-			prtile(GetBlkChar(maxb), GetBlkCol(maxb));
+			prtile(' ', 16 * GetBCol(GetBlkCol(maxb)));
 		}
 		printw("\n");
 	}
@@ -771,40 +784,9 @@ void prtfmp(pos cp, int rng)
 	{
 		for (int tx = cp.x - rng; tx <= cp.x + rng; tx++)
 		{
-			if (player.p == ctop(tx, ty))
-			{
-				prtile(GetMobChar(-1), GetMobCol(-1));
-				continue;
-			}
-			for (int i = 0; i < inum; i++)
-			{
-				if (world.witem[i].id && world.witem[i].p == ctop(tx, ty) && world.witem[i].plc)
-				{
-					prtile(GetItemChar(world.witem[i].id), GetItemCol(world.witem[i].id));
-					fi = 1;
-					break;
-				}
-			}
-			if (fi)
-			{
-				fi = 0;
-				continue;
-			}
-			for (int j = 0; j < mobn; j++)
-			{
-				if (mob[j].id && mob[j].p == ctop(tx, ty))
-				{
-					prtile(GetMobChar(mob[j].id), GetMobCol(mob[j].id));
-					mf = 1;
-					break;
-				}
-			}
-			if (mf)
-			{
-				mf = 0;
-				continue;
-			}
-			prtile(GetBlkChar(blk[blki(tx, ty)]), GetBlkCol(blk[blki(tx, ty)]));
+			// prtile(GetBlkChar(blk[blki(tx, ty)]), GetBlkCol(blk[blki(tx,
+			// ty)]));
+			prtile(' ', 16 * GetBCol(GetBlkCol(blk[blki(tx, ty)])));
 		}
 		move(cy() + 1, tmx);
 	}

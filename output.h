@@ -2,7 +2,7 @@
 #define _OUTPUT_H_
 #include <ncurses.h>
 extern int scr_w, scr_h;
-extern attr_t attr[17];
+extern attr_t attr[200];
 int cx();
 int cy();
 void printwr(const char *ch, ...);
