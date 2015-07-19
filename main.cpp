@@ -30,8 +30,7 @@ int main()
 				continue;
 			}
 		}
-		msg.Show();
-		refresh();
+		prthud();
 		while (1)
 		{
 			int key = KeyEvent();

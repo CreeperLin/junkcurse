@@ -745,7 +745,7 @@ int GetBCol(int fc)
 void prthmp(int wid)
 {
 	clear();
-	int chs = wlth / wid, chc[blkid + 1];
+	int chs = wlth / wid + 1, chc[blkid + 1];
 	pos cp;
 	for (cp.y = 0; cp.y <= wlth - chs; cp.y += chs)
 	{
