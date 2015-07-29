@@ -92,7 +92,7 @@ int Command()
 	}
 	else if (!strcmp(tpc, "decap"))
 	{
-		int i = prtmb(0);
+		int i = prtmb(0, 0);
 		if (i >= 0)
 		{
 			mob[i].Reset();
@@ -100,7 +100,7 @@ int Command()
 	}
 	else if (!strcmp(tpc, "watch"))
 	{
-		int i = prtmb(0);
+		int i = prtmb(0, 0);
 		if (i >= 0)
 		{
 			player.ptgt = i + 1;
