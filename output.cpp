@@ -480,7 +480,7 @@ void Obsrv()
 	}
 }
 
-int prtmb(int rng)
+int prtmb(int rng, int act)
 {
 	move(scr_h - msgh - comh, 0);
 	int no = 0, cnum[mobn];
@@ -519,6 +519,10 @@ int prtmb(int rng)
 	}
 	mvprintw(scr_h - msgh - 2, 0, "Enter number to select, 0 to cancel.\n");
 	refresh();
+	if (act && getch() == key[act])
+	{
+		return cnum[0];
+	}
 	int tmp = InputNum(no);
 	if (tmp == 0)
 	{

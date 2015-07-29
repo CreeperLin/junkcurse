@@ -72,7 +72,7 @@ void CPlayer::Kill()
 	else
 	{
 		ptgt = 0;
-		tmpn = prtmb(min(GetSrng(), GetRng()));
+		tmpn = prtmb(min(GetSrng(), GetRng()), 12);
 		if (tmpn < 0)
 		{
 			if (tmpn == -1)
@@ -164,7 +164,7 @@ void CPlayer::Kill()
 
 void CPlayer::Talk()
 {
-	int tnum = prtmb(2);
+	int tnum = prtmb(2, 14);
 	if (tnum < 0)
 	{
 		if (tnum == -1)
