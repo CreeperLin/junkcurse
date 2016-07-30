@@ -1,5 +1,5 @@
 junkcurse
 =========
 
-Project junk with libncurses
+Project junk based on libncurses
 written in CPP/C
